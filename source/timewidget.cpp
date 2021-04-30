@@ -81,10 +81,22 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
     if(!bck->isHidden())
     {
         movable = true;
+        //自动对齐
         if(settings->doAutoAlign())
         {
             auto_align(e->globalX(), e->globalY());
         }
+
+        //调整侧边栏位置
+        if(x() + width() + sideBar->width() > scrWid)
+        {
+            sideBar->setType(SideBarType::left);
+        }
+        else if(x() - sideBar->width() < 0)
+        {
+            sideBar->setType(SideBarType::right);
+        }
+        sideBar->auto_move();
     }
 }
 
@@ -93,7 +105,9 @@ void TimeWidget::moveEvent(QMoveEvent* e)
     if(sideBar != nullptr)
     {
         settings->write_log(QString("移动至:(").append(QString::number(e->pos().x())).append(",").append(QString::number(e->pos().y())).append(")"));
-        sideBar->move(e->pos().x() + width(), e->pos().y());
+
+        //移动侧边栏
+        sideBar->auto_move();
     }
 }
 
@@ -135,8 +149,8 @@ void TimeWidget::on_bck_stpMoving()
 void TimeWidget::auto_align(int aX, int aY)
 {
     //获取网格宽度和高度
-    double gridWid = double(scrWid) / double(settings->size()) / SIZE_RATE;
-    double gridHei = double(scrHei) / double(settings->size()) / SIZE_RATE;
+    double gridWid = double(scrWid) * double(settings->size()) / double(SIZE_RATE);
+    double gridHei = double(scrHei) * double(settings->size()) / double(SIZE_RATE);
 
     int gridX = aX / gridWid;
     int gridY = aY / gridHei;

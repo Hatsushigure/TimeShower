@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/buttons/about.png</file>
-        <file>resources/buttons/close.png</file>
-        <file>resources/buttons/settings.png</file>
         <file>resources/background.png</file>
+        <file>resources/fluentStyle/buttons/about.png</file>
+        <file>resources/fluentStyle/buttons/close.png</file>
+        <file>resources/fluentStyle/buttons/settings.png</file>
     </qresource>
 </RCC>

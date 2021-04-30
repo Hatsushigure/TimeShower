@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TIMEWIDGET_H
+#define TIMEWIDGET_H
+
 #include <QWidget>
 #include <QMouseEvent>
 #include <QPoint>
@@ -41,15 +43,14 @@ public:
 
     void paintEvent(QPaintEvent* e);
 
-    void on_mainTimer_timeOut();
-
     void on_bck_stpMoving();
+
+    void on_mainTimer_timeOut();
 
     //自动对齐
     void auto_align(int aX, int aY);
 
     ~TimeWidget();
-
 private:
     Ui::TimeWidget *ui;
 
@@ -62,6 +63,5 @@ private:
    BackgroundWidget* bck;
    SideBar* sideBar;
    Settings* settings;
-
-
 };
+#endif
