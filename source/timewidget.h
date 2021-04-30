@@ -45,6 +45,9 @@ public:
 
     void on_bck_stpMoving();
 
+    //自动对齐
+    void auto_align(int aX, int aY);
+
     ~TimeWidget();
 
 private:
@@ -54,7 +57,6 @@ private:
    QPoint fstPos;
    QTime curTime;
    QTimer* mainTimer;
-   short size;
    int scrWid;
    int scrHei;
    BackgroundWidget* bck;

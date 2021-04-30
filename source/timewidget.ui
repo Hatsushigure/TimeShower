@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
-    <height>181</height>
+    <width>170</width>
+    <height>96</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>TimeWidget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -41,7 +44,7 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string/>
+      <string>00:00:00</string>
      </property>
     </widget>
    </item>

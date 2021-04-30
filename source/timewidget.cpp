@@ -11,14 +11,13 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("设置对象已创建");
     scrWid = QApplication::desktop()->width();
     scrHei = QApplication::desktop()->height();
-    settings->write_log(QString("成功获取屏幕宽高: ").append(QString::number(scrWid)).append(", ").append(QString::number(scrHei)));
+    settings->write_log(QString("成功获取屏幕宽高:").append(QString::number(scrWid)).append(", ").append(QString::number(scrHei)));
     movable = false;
     settings->write_log("设置为不可移动");
     fstPos = QPoint();
     curTime = QTime();
     mainTimer = new QTimer(this);
     settings->write_log("计时器已创建");
-    size = settings->size();
     bck = new BackgroundWidget;
     settings->write_log("菜单背景窗体创建成功");
     sideBar = nullptr;
@@ -30,7 +29,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //移动及改变大小
     move(0, 0);
-    resize(scrWid * size / SIZE_RATE, scrHei * size / SIZE_RATE);
+    resize(scrWid * settings->size() / SIZE_RATE, scrHei * settings->size() / SIZE_RATE);
     settings->write_log("窗口大小及位置初始化完毕");
 
     //处理侧边栏
@@ -79,11 +78,13 @@ void TimeWidget::mouseDoubleClickEvent(QMouseEvent* e)
 
 void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e)
     if(!bck->isHidden())
     {
         movable = true;
-        settings->write_log("可移动设置为true");
+        if(settings->doAutoAlign())
+        {
+            auto_align(e->globalX(), e->globalY());
+        }
     }
 }
 
@@ -91,6 +92,7 @@ void TimeWidget::moveEvent(QMoveEvent* e)
 {
     if(sideBar != nullptr)
     {
+        settings->write_log(QString("移动至:(").append(QString::number(e->pos().x())).append(",").append(QString::number(e->pos().y())).append(")"));
         sideBar->move(e->pos().x() + width(), e->pos().y());
     }
 }
@@ -126,6 +128,20 @@ void TimeWidget::on_bck_stpMoving()
     sideBar->hide();
     movable = false;
     settings->write_log("接收到停止移动信号，移动结束");
+}
+
+
+//自动对齐
+void TimeWidget::auto_align(int aX, int aY)
+{
+    //获取网格宽度和高度
+    double gridWid = double(scrWid) / double(settings->size()) / SIZE_RATE;
+    double gridHei = double(scrHei) / double(settings->size()) / SIZE_RATE;
+
+    int gridX = aX / gridWid;
+    int gridY = aY / gridHei;
+    move(width() * gridX, height() * gridY);
+    settings->write_log("已自动对齐至网格");
 }
 
 TimeWidget::~TimeWidget()
