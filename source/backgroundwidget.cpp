@@ -1,7 +1,7 @@
 #include "backgroundwidget.h"
 #include "ui_backgroundwidget.h"
 
-BackgroundWidget::BackgroundWidget(int aWid, int aHei, QWidget *parent) : QWidget(parent), ui(new Ui::BackgroundWidget)
+BackgroundWidget::BackgroundWidget(int aWid, int aHei) : ui(new Ui::BackgroundWidget)
 {
     ui->setupUi(this);
 
