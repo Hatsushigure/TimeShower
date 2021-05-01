@@ -1,20 +1,5 @@
 #pragma once
-#include <QFile>
-#include <QString>
-#include <QMessageBox>
-#include <QDebug>
-#include <QFileDialog>
-#include <QTime>
-#include <QDate>
-
-//常量
-const QString FILE_NAME = "settings.txt";
-const short DEF_SIZE = 1;
-const bool DEF_DO_AUTO_ALIGN = true;
-const short APP_VERSION = 2;
-
-//枚举
-enum class LogType {info, warning, error};
+#include "timeshower.h"
 
 class Settings
 {
@@ -22,6 +7,7 @@ private:
     QFile* settingsFile;
     QFile* logFile;
     short m_size;
+    short m_timerInterval;
     bool m_doAutoAlign;
 public:
     Settings();
@@ -38,9 +24,7 @@ public:
     //写日志
     void write_log(const QString text, LogType tp = LogType::info);
 
-    //获取值
-    QString get_val(QString key);
-
     short size() {return m_size;}
+    short timerInterval() {return m_timerInterval;}
     bool doAutoAlign() {return m_doAutoAlign;}
 };

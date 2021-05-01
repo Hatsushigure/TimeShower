@@ -1,17 +1,18 @@
 #include "backgroundwidget.h"
 #include "ui_backgroundwidget.h"
 
-BackgroundWidget::BackgroundWidget(QWidget *parent) : QWidget(parent), ui(new Ui::BackgroundWidget)
+BackgroundWidget::BackgroundWidget(int aWid, int aHei, QWidget *parent) : QWidget(parent), ui(new Ui::BackgroundWidget)
 {
     ui->setupUi(this);
-    scrWid = QApplication::desktop()->width();
-    scrHei = QApplication::desktop()->height();
 
+    //窗口特效
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    resize(scrWid, scrHei);
+    //窗口大小及位置
+    resize(aWid, aHei);
     move(0, 0);
+
     hide();
 }
 

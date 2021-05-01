@@ -1,24 +1,10 @@
 #ifndef TIMEWIDGET_H
 #define TIMEWIDGET_H
 
-#include <QWidget>
-#include <QMouseEvent>
-#include <QPoint>
-#include <QTime>
-#include <QTimer>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QMoveEvent>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QPalette>
+#include "timeshower.h"
 #include "backgroundwidget.h"
 #include "sidebar.h"
 #include "settings.h"
-
-//常量
-const short SIZE_RATE = 8;   //尺寸比例
-const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间内将为常量）
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TimeWidget; }

@@ -1,23 +1,24 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
 
-SideBar::SideBar(Settings* st, QWidget *parent) : QWidget(nullptr), ui(new Ui::SideBar)
+SideBar::SideBar(QSize parSize, Settings* st, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
     ui->setupUi(this);
 
+    //初始化变量
     settings = st;
     curType = SideBarType::right;
-    par = parent;
 
+    //窗口特效
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
-    int tmp = parent->width() / 8;
+
+    int tmp = parSize.width() / SIZE_RATE;
     ui->closeButton->setIconSize(QSize(tmp, tmp));
     ui->settingsButton->setIconSize(QSize(tmp, tmp));
     ui->aboutButton->setIconSize(QSize(tmp, tmp));
-    resize(tmp, parent->height());
 
-    installEventFilter(par);
+    resize(tmp, parSize.height());
 
     hide();
 }
@@ -51,15 +52,15 @@ void SideBar::on_aboutButton_clicked()
 }
 
 //自动移动
-void SideBar::auto_move()
+void SideBar::auto_move(QPoint aPos, QSize aWH)
 {
     switch(curType)
     {
     case SideBarType::right:
-        move(par->x() + par->width(), par->y());
+        move(aPos + QPoint(aWH.width(), 0));
         break;
     case SideBarType::left:
-        move(par->x() - width(), par->y());
+        move(aPos - QPoint(width(), 0));
         break;
     default:
         break;

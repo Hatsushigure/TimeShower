@@ -1,8 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/background.png</file>
-        <file>resources/fluentStyle/buttons/about.png</file>
-        <file>resources/fluentStyle/buttons/close.png</file>
-        <file>resources/fluentStyle/buttons/settings.png</file>
+        <file>resources/fluentStyle/buttons/about.svg</file>
+        <file>resources/fluentStyle/buttons/close.svg</file>
+        <file>resources/fluentStyle/buttons/settings.svg</file>
+        <file>resources/iOSSyle/buttons/about.svg</file>
+        <file>resources/iOSSyle/buttons/close.svg</file>
+        <file>resources/iOSSyle/buttons/settings.svg</file>
     </qresource>
 </RCC>

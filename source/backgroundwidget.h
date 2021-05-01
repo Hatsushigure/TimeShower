@@ -1,11 +1,5 @@
 #pragma once
-#include <QWidget>
-#include <QPalette>
-#include <QColor>
-#include <QMouseEvent>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QDesktopWidget>
+#include "timeshower.h"
 
 namespace Ui {
 class BackgroundWidget;
@@ -15,20 +9,16 @@ class BackgroundWidget : public QWidget
 {
     Q_OBJECT
 
+private:
+    Ui::BackgroundWidget *ui;
 public:
-    explicit BackgroundWidget(QWidget *parent = nullptr);
+    explicit BackgroundWidget(int aWid, int aHei, QWidget *parent = nullptr);
 
     void mousePressEvent(QMouseEvent* e);
 
     void paintEvent(QPaintEvent* e);
 
     ~BackgroundWidget();
-
-private:
-    Ui::BackgroundWidget *ui;
-    int scrWid;
-    int scrHei;
-
 signals:
     void stpMoving();
 };

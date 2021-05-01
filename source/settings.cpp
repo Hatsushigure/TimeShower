@@ -2,19 +2,25 @@
 
 Settings::Settings()
 {
+    using namespace DefaultSettings;
+
     //初始化变量
-    settingsFile = new QFile(FILE_NAME);
-    logFile = new QFile(QDate::currentDate().toString("yyyy-MM-dd").append('-').append(QTime::currentTime().toString("HH-mm-ss")).append(".log"));
+    settingsFile = new QFile(SETTINGS_FILE_NAME);
+    logFile = new QFile(QDate::currentDate().toString("yyyy-MM-dd")
+                        .append('-')
+                        .append(QTime::currentTime().toString("HH-mm-ss"))
+                        .append(".log"));
     write_log("成功创建日志文件");
     m_size = DEF_SIZE;
     m_doAutoAlign = DEF_DO_AUTO_ALIGN;
+    m_timerInterval = TIMER_INTERVAL;
 
     read_settings();
 }
 
 //读取设置
 void Settings::read_settings()
-{
+{    
     write_log("正在读取设置...");
     if(!settingsFile->exists()) //文件不存在
     {
@@ -73,6 +79,8 @@ void Settings::read_settings()
 //写入默认设置
 void Settings::write_default_settings()
 {
+    using namespace DefaultSettings;
+
     write_log("正在写入默认设置", LogType::warning);
 
     settingsFile->open(QFile::WriteOnly);
@@ -90,7 +98,7 @@ void Settings::write_default_settings()
 
 //写入设置
 void Settings::write_settings()
-{
+{    
     write_log("正在写入设置");
 
     settingsFile->open(QFile::WriteOnly);

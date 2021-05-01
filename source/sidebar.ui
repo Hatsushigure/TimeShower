@@ -42,7 +42,7 @@
      </property>
      <property name="icon">
       <iconset resource="resources.qrc">
-       <normaloff>:/resources/fluentStyle/buttons/close.png</normaloff>:/resources/fluentStyle/buttons/close.png</iconset>
+       <normaloff>:/resources/fluentStyle/buttons/close.svg</normaloff>:/resources/fluentStyle/buttons/close.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -75,7 +75,7 @@
      </property>
      <property name="icon">
       <iconset resource="resources.qrc">
-       <normaloff>:/resources/fluentStyle/buttons/about.png</normaloff>:/resources/fluentStyle/buttons/about.png</iconset>
+       <normaloff>:/resources/fluentStyle/buttons/about.svg</normaloff>:/resources/fluentStyle/buttons/about.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -114,7 +114,7 @@
      </property>
      <property name="icon">
       <iconset resource="resources.qrc">
-       <normaloff>:/resources/fluentStyle/buttons/settings.png</normaloff>:/resources/fluentStyle/buttons/settings.png</iconset>
+       <normaloff>:/resources/fluentStyle/buttons/settings.svg</normaloff>:/resources/fluentStyle/buttons/settings.svg</iconset>
      </property>
      <property name="iconSize">
       <size>

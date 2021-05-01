@@ -19,6 +19,7 @@ HEADERS += \
     backgroundwidget.h \
     settings.h \
     sidebar.h \
+    timeshower.h \
     timewidget.h
 
 FORMS += \

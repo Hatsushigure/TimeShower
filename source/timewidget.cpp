@@ -1,6 +1,5 @@
 #include "timewidget.h"
 #include "ui_timewidget.h"
-#include "main.cpp"
 
 TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget)
 {
@@ -18,7 +17,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     curTime = QTime();
     mainTimer = new QTimer(this);
     settings->write_log("计时器已创建");
-    bck = new BackgroundWidget;
+    bck = new BackgroundWidget(scrWid, scrHei);
     settings->write_log("菜单背景窗体创建成功");
     sideBar = nullptr;
 
@@ -33,11 +32,11 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("窗口大小及位置初始化完毕");
 
     //处理侧边栏
-    sideBar = new SideBar(settings, this);
+    sideBar = new SideBar(size(), settings, this);
     settings->write_log("菜单侧边栏创建成功");
 
     //处理计时器
-    mainTimer->setInterval(TIMER_INTERVAL);
+    mainTimer->setInterval(settings->timerInterval());
     mainTimer->start();
     settings->write_log("计时器已开启");
 
@@ -96,7 +95,7 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
         {
             sideBar->setType(SideBarType::right);
         }
-        sideBar->auto_move();
+        sideBar->auto_move(pos(), size());
     }
 }
 
@@ -104,10 +103,14 @@ void TimeWidget::moveEvent(QMoveEvent* e)
 {
     if(sideBar != nullptr)
     {
-        settings->write_log(QString("移动至:(").append(QString::number(e->pos().x())).append(",").append(QString::number(e->pos().y())).append(")"));
+        settings->write_log(QString("移动至:(")
+                            .append(QString::number(e->pos().x()))
+                            .append(",")
+                            .append(QString::number(e->pos().y()))
+                            .append(")"));
 
         //移动侧边栏
-        sideBar->auto_move();
+        sideBar->auto_move(pos(), size());
     }
 }
 
