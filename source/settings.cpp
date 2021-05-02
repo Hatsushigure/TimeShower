@@ -25,7 +25,16 @@ void Settings::read_settings()
     if(!settingsFile->exists()) //文件不存在
     {
         write_log("文件不存在，恢复默认设置", LogType::warning);
-        QMessageBox errMsg(QMessageBox::Critical, "无法读取设置", "设置文件不存在！", QMessageBox::StandardButton::Ok);
+        Dialog errMsg(nullptr, QApplication::desktop()->width(), "无法读取设置");
+        QLabel* txt = new QLabel("    设置文件不存在！");
+        errMsg.setContent(txt);
+
+        QFont ft = txt->font();
+        ft.setBold(true);
+        ft.setFamily("微软雅黑");
+        ft.setPointSize(10);
+        static_cast<QLabel*>(errMsg.content())->setFont(ft);
+
         errMsg.exec();
         settingsFile->close();
         write_default_settings();
@@ -70,7 +79,17 @@ void Settings::read_settings()
     }
     else    //无读取权限(基本不会)
     {
-        QMessageBox errMsg(QMessageBox::Critical, "无法读取设置", "无法打开文件，请检查是否具有读取权限！", QMessageBox::StandardButton::Ok);
+        write_log("无文件读取权限", LogType::error);
+        Dialog errMsg(nullptr, QApplication::desktop()->width(), "无法读取设置");
+        QLabel* txt = new QLabel("    无文件读取权限，应用无法正常启动！\n\n    请手动处理权限问题后再启动");
+        errMsg.setContent(txt);
+
+        QFont ft = txt->font();
+        ft.setBold(true);
+        ft.setFamily("微软雅黑");
+        ft.setPointSize(10);
+        static_cast<QLabel*>(errMsg.content())->setFont(ft);
+
         errMsg.exec();
         settingsFile->close();
     }
@@ -115,7 +134,7 @@ void Settings::write_settings()
 }
 
 //写日志
-void Settings::write_log(const QString text, LogType tp)
+void Settings::write_log(const QString &text, LogType tp)
 {
     QString tmp = "[";
     tmp.append(QTime::currentTime().toString());

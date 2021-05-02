@@ -12,14 +12,16 @@
 #include <QPaintEvent>
 #include <QMoveEvent>
 #include <QPainter>
-#include <QDesktopWidget>
 #include <QApplication>
-#include <QMessageBox>
 #include <QIcon>
 #include <QTimer>
-#include "dialog.h"
+#include <QLayout>
+#include <QDesktopWidget>
+#include <QLabel>
 
 //常量
+const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
+const int STD_TITLE_HEIGHT = 25;    //标准标题栏高度
 const QString SETTINGS_FILE_NAME = "settings.txt";
 const short SIZE_RATE = 8;   //尺寸比例
 const short APP_VERSION = 2;

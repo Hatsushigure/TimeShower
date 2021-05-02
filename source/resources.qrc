@@ -4,8 +4,5 @@
         <file>resources/fluentStyle/buttons/about.svg</file>
         <file>resources/fluentStyle/buttons/close.svg</file>
         <file>resources/fluentStyle/buttons/settings.svg</file>
-        <file>resources/iOSSyle/buttons/about.svg</file>
-        <file>resources/iOSSyle/buttons/close.svg</file>
-        <file>resources/iOSSyle/buttons/settings.svg</file>
     </qresource>
 </RCC>

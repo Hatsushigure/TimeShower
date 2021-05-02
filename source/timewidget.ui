@@ -21,7 +21,7 @@
     <widget class="QLabel" name="currentLabel">
      <property name="font">
       <font>
-       <pointsize>5</pointsize>
+       <pointsize>8</pointsize>
        <italic>true</italic>
       </font>
      </property>
@@ -34,14 +34,16 @@
     <widget class="QLabel" name="timeLabel">
      <property name="font">
       <font>
-       <family>Microsoft YaHei</family>
+       <family>微软雅黑</family>
        <pointsize>25</pointsize>
        <weight>75</weight>
+       <italic>false</italic>
        <bold>true</bold>
+       <kerning>true</kerning>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>00:00:00</string>
@@ -52,6 +54,7 @@
     <widget class="QLabel" name="eventLabel">
      <property name="font">
       <font>
+       <pointsize>8</pointsize>
        <weight>50</weight>
        <italic>true</italic>
        <bold>false</bold>

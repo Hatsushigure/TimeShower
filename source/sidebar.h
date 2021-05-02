@@ -3,6 +3,7 @@
 
 #include "timeshower.h"
 #include "settings.h"
+#include "dialog.h"
 
 namespace Ui {
 class SideBar;
@@ -17,7 +18,7 @@ private:
     Settings* settings;
     SideBarType curType;
 public:
-    explicit SideBar(QSize parSize, Settings* st, QWidget *parent = nullptr);
+    explicit SideBar(const QSize& parSize, Settings* st, QWidget *parent = nullptr);
 
     //设置类型
     void setType(SideBarType tp);

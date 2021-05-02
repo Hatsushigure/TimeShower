@@ -1,5 +1,6 @@
 #pragma once
 #include "timeshower.h"
+#include "dialog.h"
 
 class Settings
 {
@@ -22,7 +23,7 @@ public:
     void write_settings();
 
     //写日志
-    void write_log(const QString text, LogType tp = LogType::info);
+    void write_log(const QString& text, LogType tp = LogType::info);
 
     short size() {return m_size;}
     short timerInterval() {return m_timerInterval;}

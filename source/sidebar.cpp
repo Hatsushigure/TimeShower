@@ -1,7 +1,7 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
 
-SideBar::SideBar(QSize parSize, Settings* st, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
+SideBar::SideBar(const QSize &parSize, Settings* st, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
     ui->setupUi(this);
 
@@ -25,9 +25,18 @@ SideBar::SideBar(QSize parSize, Settings* st, QWidget *parent) : QWidget(parent)
 
 void SideBar::on_settingsButton_clicked()
 {
-    Dialog inf(this);
+    Dialog inf(this, QApplication::desktop()->width(), "提示");
+    QLabel* errMsg = new QLabel("    暂时不提供图形设置界面！");
+    inf.setContent(errMsg);
+
+    QFont ft = errMsg->font();
+    ft.setBold(true);
+    ft.setFamily("微软雅黑");
+    ft.setPointSize(10);
+    static_cast<QLabel*>(inf.content())->setFont(ft);
+
     inf.exec();
-    QMessageBox::information(this, "", "暂时不提供图形设置界面！");
+
     settings->write_log("设置按钮被点击");
 }
 
@@ -39,18 +48,16 @@ void SideBar::on_closeButton_clicked()
 
 void SideBar::on_aboutButton_clicked()
 {
-    settings->write_log("关于按钮被点击");
-    QMessageBox aboutMessage(this);
-    aboutMessage.setWindowTitle("关于 \"时间显示器\"");
-    aboutMessage.setText("    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.0.2\n    作者:czj_____");
-    QPushButton aboutQtButton("关于 \"Qt\"", &aboutMessage);
-    aboutMessage.addButton(QMessageBox::StandardButton::Ok);
-    aboutMessage.addButton(&aboutQtButton, QMessageBox::ButtonRole::HelpRole);
-    aboutMessage.exec();
-    if(aboutMessage.clickedButton() == &aboutQtButton)
-    {
-        QMessageBox::aboutQt(this);
-    }
+    Dialog about(this, QApplication::desktop()->width(), "关于 \"时间显示器\"");
+    QLabel* msg = new QLabel("    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1\n    作者:czj_____");
+    about.setContent(msg);
+    QFont ft = msg->font();
+    ft.setBold(true);
+    ft.setFamily("微软雅黑");
+    ft.setPointSize(10);
+    static_cast<QLabel*>(about.content())->setFont(ft);
+
+    about.exec();
 }
 
 //自动移动
@@ -74,6 +81,7 @@ void SideBar::setType(SideBarType tp)
 {
     curType = tp;
 }
+
 SideBar::~SideBar()
 {
     settings->write_log("侧边栏被析构");
