@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     backgroundwidget.cpp \
+    dialog.cpp \
     main.cpp \
     settings.cpp \
     sidebar.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     backgroundwidget.h \
+    dialog.h \
     settings.h \
     sidebar.h \
     timeshower.h \
@@ -24,6 +26,7 @@ HEADERS += \
 
 FORMS += \
     backgroundwidget.ui \
+    dialog.ui \
     sidebar.ui \
     timewidget.ui
 

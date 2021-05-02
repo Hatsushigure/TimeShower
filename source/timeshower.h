@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QIcon>
 #include <QTimer>
+#include "dialog.h"
 
 //常量
 const QString SETTINGS_FILE_NAME = "settings.txt";
