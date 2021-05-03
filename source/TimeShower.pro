@@ -12,6 +12,7 @@ SOURCES += \
     backgroundwidget.cpp \
     dialog.cpp \
     main.cpp \
+    messagebox.cpp \
     settings.cpp \
     sidebar.cpp \
     timewidget.cpp
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     backgroundwidget.h \
     dialog.h \
+    messagebox.h \
     settings.h \
     sidebar.h \
     timeshower.h \

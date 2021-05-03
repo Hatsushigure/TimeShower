@@ -3,7 +3,7 @@
 
 #include "timeshower.h"
 #include "settings.h"
-#include "dialog.h"
+#include "messagebox.h"
 
 namespace Ui {
 class SideBar;

@@ -50,6 +50,7 @@ void Dialog::setContent(QWidget* wid)
     QHBoxLayout layout(ui->contentWidget);
     layout.addWidget(wid);
     ui->contentWidget->setLayout(&layout);
+    wid->resize(width(), ui->contentWidget->height());
     m_content = wid;
 }
 

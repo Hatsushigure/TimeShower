@@ -1,7 +1,6 @@
 #pragma once
 #include "timeshower.h"
-#include "dialog.h"
-
+#include "messagebox.h"
 class Settings
 {
 private:

@@ -25,16 +25,7 @@ SideBar::SideBar(const QSize &parSize, Settings* st, QWidget *parent) : QWidget(
 
 void SideBar::on_settingsButton_clicked()
 {
-    Dialog inf(this, QApplication::desktop()->width(), "提示");
-    QLabel* errMsg = new QLabel("    暂时不提供图形设置界面！");
-    inf.setContent(errMsg);
-
-    QFont ft = errMsg->font();
-    ft.setBold(true);
-    ft.setFamily("微软雅黑");
-    ft.setPointSize(10);
-    static_cast<QLabel*>(inf.content())->setFont(ft);
-
+    MessageBox inf(this, QApplication::desktop()->width(), "    暂时不提供图形设置界面！", "提示");
     inf.exec();
 
     settings->write_log("设置按钮被点击");
@@ -48,15 +39,7 @@ void SideBar::on_closeButton_clicked()
 
 void SideBar::on_aboutButton_clicked()
 {
-    Dialog about(this, QApplication::desktop()->width(), "关于 \"时间显示器\"");
-    QLabel* msg = new QLabel("    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1\n    作者:czj_____");
-    about.setContent(msg);
-    QFont ft = msg->font();
-    ft.setBold(true);
-    ft.setFamily("微软雅黑");
-    ft.setPointSize(10);
-    static_cast<QLabel*>(about.content())->setFont(ft);
-
+    MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1\n    作者:czj_____", "关于 \"时间显示器\"");
     about.exec();
 }
 
