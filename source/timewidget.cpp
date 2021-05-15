@@ -27,7 +27,9 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("窗口特效设置完毕");
 
     //设置界面元素显示效果
-    ui->timeLabel->setStyleSheet("color : white");
+    ui->timeLabel->setStyleSheet("color:#E0E0E0");
+    ui->currentLabel->setStyleSheet("color:#F7F7F7");
+    ui->eventLabel->setStyleSheet("color:yellow");
 
     //移动及改变大小
     move(0, 0);

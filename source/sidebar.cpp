@@ -25,7 +25,7 @@ SideBar::SideBar(const QSize &parSize, Settings* st, QWidget *parent) : QWidget(
 
 void SideBar::on_settingsButton_clicked()
 {
-    MessageBox inf(this, QApplication::desktop()->width(), "    暂时不提供图形设置界面！", "提示");
+    MessageBox inf(this, QApplication::desktop()->width(), "      暂时不提供图形设置界面!", "提示");
     inf.exec();
 
     settings->write_log("设置按钮被点击");

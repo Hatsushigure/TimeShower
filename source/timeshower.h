@@ -21,10 +21,14 @@
 
 //常量
 const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
-const int STD_TITLE_HEIGHT = 25;    //标准标题栏高度
 const QString SETTINGS_FILE_NAME = "settings.txt";
 const short SIZE_RATE = 8;   //尺寸比例
 const short APP_VERSION = 2;
+
+namespace DialogDefines {
+const short STD_TITLE_HEIGHT = 25;    //标准标题栏高度
+const short STD_MAX_WIDTH = 400;    //标准最大宽度
+}
 namespace DefaultSettings {
 const short DEF_SIZE = 1;
 const bool DEF_DO_AUTO_ALIGN = true;

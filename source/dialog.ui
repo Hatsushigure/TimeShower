@@ -69,6 +69,8 @@
      <string/>
     </property>
    </widget>
+   <zorder>titleLabel</zorder>
+   <zorder>closeButton</zorder>
   </widget>
   <widget class="QWidget" name="contentWidget" native="true">
    <property name="geometry">
@@ -78,6 +80,9 @@
      <width>400</width>
      <height>150</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
   </widget>
   <widget class="QWidget" name="buttonWidget" native="true">

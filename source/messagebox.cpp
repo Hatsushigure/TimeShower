@@ -6,13 +6,12 @@ MessageBox::MessageBox(QWidget *parent, int aWid, const QString &aText, const QS
     QLabel* msg = new QLabel;
     msg->setText(aText);
     QFont ft = msg->font();
-    ft.setFamily("微软雅黑");
+    ft.setFamily("楷体");
     ft.setPointSize(10);
-    ft.setBold(true);
     msg->setFont(ft);
-    msg->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    qDebug() << msg->width();
-    qDebug() << width();
+    msg->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    msg->setWordWrap(true);
+    msg->adjustSize();
 
     setContent(msg);
 }
