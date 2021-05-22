@@ -57,6 +57,9 @@ void Dialog::setContent(QWidget* wid)
         wid->resize(width(), wid->height());
     }
 
+    //这一行修复了某些奇妙的BUG
+    ui->titleBar->resize(wid->width(), DialogDefines::STD_TITLE_HEIGHT * zoomRate);
+
     resize(wid->width(), wid->height() + 2 * ui->titleBar->height());
 
     ui->contentWidget->setLayout(&layout);
@@ -67,14 +70,14 @@ void Dialog::setContent(QWidget* wid)
 //改变大小
 void Dialog::resizeEvent(QResizeEvent* e)
 {
-    Q_UNUSED(e)
+    QSize sz = e->size();
 
     //标题栏
     ui->titleBar->move(0, 0);
-    ui->titleBar->resize(width(), DialogDefines::STD_TITLE_HEIGHT * zoomRate);
+    ui->titleBar->resize(sz.width(), DialogDefines::STD_TITLE_HEIGHT * zoomRate);
 
     //标题
-    ui->titleLabel->resize(width(), ui->titleBar->height());
+    ui->titleLabel->resize(sz.width(), ui->titleBar->height());
 
     //关闭按钮
     ui->closeButton->setIconSize(QSize(ui->titleBar->height(), ui->titleBar->height()));
@@ -83,7 +86,7 @@ void Dialog::resizeEvent(QResizeEvent* e)
 
     //中心窗体
     ui->contentWidget->move(0, ui->titleBar->height());
-    ui->contentWidget->resize(width(), height() - 2 * ui->titleBar->height());
+    ui->contentWidget->resize(sz.width(), sz.height() - 2 * ui->titleBar->height());
 
     //底部按钮窗体
     ui->buttonWidget->move(0, ui->titleBar->height() + ui->contentWidget->height());
@@ -91,7 +94,7 @@ void Dialog::resizeEvent(QResizeEvent* e)
 
     //底部按钮临时解决方案
     ui->button1->resize(ui->button1->width() * zoomRate, ui->button1->height() * zoomRate);
-    ui->button1->move(width() - ui->button1->width(), 0);
+    ui->button1->move(sz.width() - ui->button1->width(), 0);
 }
 
 //改标题槽函数
