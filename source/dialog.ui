@@ -85,7 +85,7 @@
     <string notr="true"/>
    </property>
   </widget>
-  <widget class="QWidget" name="buttonWidget" native="true">
+  <widget class="QDialogButtonBox" name="buttonWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -95,30 +95,11 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{
-	border-radius : 5px;
-	border : 1px solid gray;
-}</string>
+    <string notr="true"/>
    </property>
-   <widget class="QPushButton" name="button1">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>0</y>
-      <width>50</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>确定</string>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::No|QDialogButtonBox::Ok</set>
+   </property>
   </widget>
  </widget>
  <resources>
@@ -138,22 +119,6 @@
     <hint type="destinationlabel">
      <x>199</x>
      <y>103</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>button1</sender>
-   <signal>clicked()</signal>
-   <receiver>Dialog</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>374</x>
-     <y>187</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>99</y>
     </hint>
    </hints>
   </connection>

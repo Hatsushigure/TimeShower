@@ -39,7 +39,7 @@ void SideBar::on_closeButton_clicked()
 
 void SideBar::on_aboutButton_clicked()
 {
-    MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.2\n    作者:czj_____", "关于 \"时间显示器\"");
+    MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.3\n    作者:czj_____", "关于 \"时间显示器\"");
     about.exec();
 }
 

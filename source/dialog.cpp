@@ -9,6 +9,7 @@ Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(paren
     fstPos = QPoint();
     zoomRate = aWid / STD_SCR_WIDTH;
     m_content = nullptr;
+    selected = nullptr;
 
     //改大小
     resize(DialogDefines::STD_MAX_WIDTH * zoomRate, height());
@@ -91,16 +92,19 @@ void Dialog::resizeEvent(QResizeEvent* e)
     //底部按钮窗体
     ui->buttonWidget->move(0, ui->titleBar->height() + ui->contentWidget->height());
     ui->buttonWidget->resize(ui->titleBar->size());
-
-    //底部按钮临时解决方案
-    ui->button1->resize(ui->button1->width() * zoomRate, ui->button1->height() * zoomRate);
-    ui->button1->move(sz.width() - ui->button1->width(), 0);
 }
 
 //改标题槽函数
 void Dialog::on_Dialog_windowTitleChanged(const QString &title)
 {
     ui->titleLabel->setText(title);
+}
+
+//底部按钮点击
+void Dialog::on_buttonWidget_clicked(QAbstractButton *button)
+{
+    selected = button;
+    hide();
 }
 
 Dialog::~Dialog()

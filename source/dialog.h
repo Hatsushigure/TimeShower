@@ -16,6 +16,7 @@ private:
     QPoint fstPos;
     double zoomRate;
     QWidget* m_content;
+    QAbstractButton* selected;
 public:
     explicit Dialog(QWidget* parent, int aWid, const QString& aTitle);
 
@@ -31,10 +32,14 @@ public:
     //返回中心窗体
     QWidget* content() {return m_content;}
 
+    //返回当前选中的按钮
+    QAbstractButton* get_button() {return selected;}
+
     ~Dialog();
 private slots:
     //改标题槽函数
     void on_Dialog_windowTitleChanged(const QString &title);
+    void on_buttonWidget_clicked(QAbstractButton *button);
 };
 
 #endif // DIALOG_H
