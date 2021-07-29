@@ -17,6 +17,7 @@ SOURCES += \
     messagebox.cpp \
     settings.cpp \
     sidebar.cpp \
+    timeevent.cpp \
     timewidget.cpp
 
 HEADERS += \
@@ -25,6 +26,7 @@ HEADERS += \
     messagebox.h \
     settings.h \
     sidebar.h \
+    timeevent.h \
     timeshower.h \
     timewidget.h
 

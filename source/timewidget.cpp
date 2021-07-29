@@ -65,7 +65,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 void TimeWidget::add_tray_icon()
 {
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon(":/resources/appIcon.svg"));
+    trayIcon->setIcon(APP_ICON);
     trayIcon->setToolTip("时间显示器");
 
     //创建右键菜单
@@ -76,6 +76,9 @@ void TimeWidget::add_tray_icon()
 
     trayIcon->show();
     settings->write_log("系统托盘图标创建成功");
+
+    //测试
+    trayIcon->showMessage("title", "message", APP_ICON);
 }
 
 //从托盘中唤起
