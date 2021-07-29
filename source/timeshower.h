@@ -18,6 +18,8 @@
 #include <QLayout>
 #include <QDesktopWidget>
 #include <QLabel>
+#include <QSystemTrayIcon>
+#include <QMenu>
 
 //常量
 const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)

@@ -17,6 +17,15 @@ class TimeWidget : public QWidget
 public:
     TimeWidget(QWidget *parent = nullptr);
 
+    //创建系统托盘图标
+    void add_tray_icon();
+
+    //从托盘中唤起
+    void show_from_tray();
+
+    //最小化
+    void hide_all();
+
     void mousePressEvent(QMouseEvent* e);
 
     void mouseMoveEvent(QMouseEvent* e);
@@ -49,5 +58,9 @@ private:
    BackgroundWidget* bck;
    SideBar* sideBar;
    Settings* settings;
+   QSystemTrayIcon* trayIcon;
+   QAction* exitAction;
+   QAction* showAction;
+   QMenu* trayMenu;
 };
 #endif

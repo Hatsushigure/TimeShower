@@ -20,6 +20,10 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     bck = new BackgroundWidget(scrWid, scrHei);
     settings->write_log("菜单背景窗体创建成功");
     sideBar = nullptr;
+    trayIcon = nullptr;
+    exitAction = new QAction("退出");
+    showAction = new QAction("显示主界面");
+    trayMenu = new QMenu(this);
 
     //窗口效果
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Tool);
@@ -45,11 +49,49 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     mainTimer->start();
     settings->write_log("计时器已开启");
 
+    //创建托盘图标
+    add_tray_icon();
+
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
-    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::hide);
+    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::hide_all);
+    connect(showAction, &QAction::triggered, this, &TimeWidget::show_from_tray);
+    connect(exitAction, &QAction::triggered, this, &QApplication::quit);
     settings->write_log("信号和槽关联成功，初始化结束");
+}
+
+//创建系统托盘图标
+void TimeWidget::add_tray_icon()
+{
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setIcon(QIcon(":/resources/appIcon.svg"));
+    trayIcon->setToolTip("时间显示器");
+
+    //创建右键菜单
+    trayMenu->addAction(showAction);
+    trayMenu->addAction(exitAction);
+    trayIcon->setContextMenu(trayMenu);
+    settings->write_log("托盘右键菜单设置成功");
+
+    trayIcon->show();
+    settings->write_log("系统托盘图标创建成功");
+}
+
+//从托盘中唤起
+void TimeWidget::show_from_tray()
+{
+    show();
+    settings->write_log("主界面已显示");
+}
+
+//最小化
+void TimeWidget::hide_all()
+{
+    movable = false;
+    hide();
+    bck->hide();
+    settings->write_log("已最小化");
 }
 
 void TimeWidget::mousePressEvent(QMouseEvent* e)
@@ -102,19 +144,21 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
             sideBar->setType(SideBarType::right);
         }
         sideBar->auto_move(pos(), size());
+
+        settings->write_log(QString("移动至:(")
+                            .append(QString::number(pos().x()))
+                            .append(",")
+                            .append(QString::number(pos().y()))
+                            .append(")"));
     }
 }
 
 void TimeWidget::moveEvent(QMoveEvent* e)
 {
+    Q_UNUSED(e);
+
     if(sideBar != nullptr)
     {
-        settings->write_log(QString("移动至:(")
-                            .append(QString::number(e->pos().x()))
-                            .append(",")
-                            .append(QString::number(e->pos().y()))
-                            .append(")"));
-
         //移动侧边栏
         sideBar->auto_move(pos(), size());
     }

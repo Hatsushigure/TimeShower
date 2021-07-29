@@ -35,9 +35,8 @@ void SideBar::on_closeButton_clicked()
 {
     settings->write_log("最小化按钮被点击");
     hide();
-    emit app_minimize();
     settings->write_log("已发送最小化信号");
-    //QApplication::quit();
+    emit app_minimize();
 }
 
 void SideBar::on_aboutButton_clicked()
