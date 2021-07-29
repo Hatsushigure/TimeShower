@@ -48,6 +48,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
+    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::hide);
     settings->write_log("信号和槽关联成功，初始化结束");
 }
 

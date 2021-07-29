@@ -34,6 +34,8 @@ private slots:
     void on_settingsButton_clicked();
 
     void on_aboutButton_clicked();
+signals:
+    void app_minimize();
 };
 
 #endif // SIDEBAR_H

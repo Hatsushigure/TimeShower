@@ -33,13 +33,16 @@ void SideBar::on_settingsButton_clicked()
 
 void SideBar::on_closeButton_clicked()
 {
-    settings->write_log("关闭按钮被点击");
-    QApplication::quit();
+    settings->write_log("最小化按钮被点击");
+    hide();
+    emit app_minimize();
+    settings->write_log("已发送最小化信号");
+    //QApplication::quit();
 }
 
 void SideBar::on_aboutButton_clicked()
 {
-    MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.3\n    作者:czj_____", "关于 \"时间显示器\"");
+    MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.4\n    作者:czj_____", "关于 \"时间显示器\"");
     about.exec();
 }
 
