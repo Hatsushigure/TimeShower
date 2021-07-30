@@ -20,12 +20,6 @@ public:
     //创建系统托盘图标
     void add_tray_icon();
 
-    //从托盘中唤起
-    void show_from_tray();
-
-    //最小化
-    void hide_all();
-
     void mousePressEvent(QMouseEvent* e);
 
     void mouseMoveEvent(QMouseEvent* e);
@@ -41,6 +35,21 @@ public:
     void on_bck_stpMoving();
 
     void on_mainTimer_timeOut();
+
+    //从托盘中唤起槽函数
+    void slotShow();
+
+    //最小化槽函数
+    void slotHide();
+
+    //关机槽函数
+    void slotShutDown();
+
+    //重启槽函数
+    void slotRestart();
+
+    //显示消息槽函数
+    void slotShowMessage(QString msg);
 
     //自动对齐
     void auto_align(int aX, int aY);
@@ -59,8 +68,9 @@ private:
    SideBar* sideBar;
    Settings* settings;
    QSystemTrayIcon* trayIcon;
-   QAction* exitAction;
-   QAction* showAction;
+   QAction* actionExit;
+   QAction* actionShow;
+   QAction* actionHide;
    QMenu* trayMenu;
 };
 #endif

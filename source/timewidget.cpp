@@ -21,8 +21,9 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("菜单背景窗体创建成功");
     sideBar = nullptr;
     trayIcon = nullptr;
-    exitAction = new QAction("退出");
-    showAction = new QAction("显示主界面");
+    actionExit = new QAction("退出");
+    actionShow = new QAction("显示主界面");
+    actionHide = new QAction("隐藏");
     trayMenu = new QMenu(this);
 
     //窗口效果
@@ -55,10 +56,13 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
-    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::hide_all);
-    connect(showAction, &QAction::triggered, this, &TimeWidget::show_from_tray);
-    connect(exitAction, &QAction::triggered, this, &QApplication::quit);
+    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::slotHide);
+    connect(actionShow, &QAction::triggered, this, &TimeWidget::slotShow);
+    connect(actionExit, &QAction::triggered, this, &QApplication::quit);
+    connect(actionHide, &QAction::triggered, this, &TimeWidget::slotHide);
     settings->write_log("信号和槽关联成功，初始化结束");
+
+    actionShow->trigger();
 }
 
 //创建系统托盘图标
@@ -69,8 +73,10 @@ void TimeWidget::add_tray_icon()
     trayIcon->setToolTip("时间显示器");
 
     //创建右键菜单
-    trayMenu->addAction(showAction);
-    trayMenu->addAction(exitAction);
+    trayMenu->addAction(actionShow);
+    trayMenu->addAction(actionHide);
+    trayMenu->addSeparator();
+    trayMenu->addAction(actionExit);
     trayIcon->setContextMenu(trayMenu);
     settings->write_log("托盘右键菜单设置成功");
 
@@ -82,19 +88,42 @@ void TimeWidget::add_tray_icon()
 }
 
 //从托盘中唤起
-void TimeWidget::show_from_tray()
+void TimeWidget::slotShow()
 {
     show();
+    actionShow->setDisabled(true);
+    actionHide->setEnabled(true);
     settings->write_log("主界面已显示");
 }
 
 //最小化
-void TimeWidget::hide_all()
+void TimeWidget::slotHide()
 {
     movable = false;
     hide();
     bck->hide();
+    actionShow->setEnabled(true);
+    actionHide->setDisabled(true);
     settings->write_log("已最小化");
+}
+
+
+//关机槽函数
+void TimeWidget::slotShutDown()
+{
+    system("shutdown -s -t 600");
+}
+
+//重启槽函数
+void TimeWidget::slotRestart()
+{
+    system("shutdown -r -t 600");
+}
+
+//显示消息槽函数
+void TimeWidget::slotShowMessage(QString msg)
+{
+    trayIcon->showMessage("来自\"TimeShower\"的消息", msg, APP_ICON);
 }
 
 void TimeWidget::mousePressEvent(QMouseEvent* e)

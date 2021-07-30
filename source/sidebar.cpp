@@ -14,7 +14,7 @@ SideBar::SideBar(const QSize &parSize, Settings* st, QWidget *parent) : QWidget(
     setAttribute(Qt::WA_TranslucentBackground);
 
     int tmp = parSize.width() / SIZE_RATE;
-    ui->closeButton->setIconSize(QSize(tmp, tmp));
+    ui->minimizeButton->setIconSize(QSize(tmp, tmp));
     ui->settingsButton->setIconSize(QSize(tmp, tmp));
     ui->aboutButton->setIconSize(QSize(tmp, tmp));
 
@@ -31,7 +31,7 @@ void SideBar::on_settingsButton_clicked()
     settings->write_log("设置按钮被点击");
 }
 
-void SideBar::on_closeButton_clicked()
+void SideBar::on_minimizeButton_clicked()
 {
     settings->write_log("最小化按钮被点击");
     hide();

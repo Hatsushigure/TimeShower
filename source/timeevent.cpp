@@ -1,18 +1,12 @@
 #include "timeevent.h"
 
-TimeEvent::TimeEvent(QString aName, int aTime, QList<TimeEventAction> aActions, QString aMessage)
+TimeEvent::TimeEvent(QString aName, int aTime, QList<TimeEventAction> aActions, QString aMessage, QObject* parent) :QObject(parent)
 {
     m_name = aName;
     time = aTime;
-    m_actions = aActions;
+    actions = aActions;
     message = aMessage;
-    m_triggered = false;
-}
-
-//显示消息（如果有这个操作的话）
-void TimeEvent::show_message(QSystemTrayIcon *trayIco)
-{
-    trayIco->showMessage("", message, APP_ICON);
+    triggered = false;
 }
 
 //检测时间
@@ -26,8 +20,35 @@ bool TimeEvent::check_time(int curTime)
         return false;
 }
 
-//设置触发状态
+//触发事件
 void TimeEvent::trigger()
 {
-    m_triggered = true;
+    for(auto i = actions.begin(); i != actions.end(); i++)
+    {
+        if(*i == TimeEventAction::exit)
+        {
+            emit signalExit();
+        }
+        else if(*i == TimeEventAction::hide)
+        {
+            emit signalHide();
+        }
+        else if(*i == TimeEventAction::restart)
+        {
+            emit signalRestart();
+        }
+        else if(*i == TimeEventAction::show)
+        {
+            emit signalShow();
+        }
+        else if(*i == TimeEventAction::showMessage)
+        {
+            emit signalShowMessage(message);
+        }
+        else if(*i == TimeEventAction::shutDown)
+        {
+            emit signalShutDown();
+        }
+    }
+    triggered = true;
 }

@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QPushButton" name="closeButton">
+    <widget class="QPushButton" name="minimizeButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
