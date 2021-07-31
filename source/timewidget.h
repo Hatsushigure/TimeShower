@@ -5,6 +5,7 @@
 #include "backgroundwidget.h"
 #include "sidebar.h"
 #include "settings.h"
+#include "timeeventmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TimeWidget; }
@@ -51,6 +52,9 @@ public:
     //显示消息槽函数
     void slotShowMessage(QString msg);
 
+    //退出槽函数
+    void slotExit();
+
     //自动对齐
     void auto_align(int aX, int aY);
 
@@ -72,5 +76,6 @@ private:
    QAction* actionShow;
    QAction* actionHide;
    QMenu* trayMenu;
+   TimeEventManager* evMgr;
 };
 #endif

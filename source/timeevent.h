@@ -13,7 +13,7 @@ private:
     QString message;
     bool triggered;
 public:
-    TimeEvent(QString aName, int aTime, QList<TimeEventAction> aActions, QString aMessage, QObject* parent = nullptr);
+    TimeEvent(QString aName, int aTime, const QList<TimeEventAction>* aActions, QString aMessage);
 
     //获取事件名称
     QString name() {return m_name;}
@@ -23,6 +23,9 @@ public:
 
     //触发事件
     void trigger();
+
+    //是否触发
+    bool isTriggered() {return triggered;}
 
 signals:
     //关机

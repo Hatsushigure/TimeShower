@@ -11,11 +11,13 @@ Settings::Settings()
                         .append(QTime::currentTime().toString("HH-mm-ss"))
                         .append(".log"));
     write_log("成功创建日志文件");
+    write_log("正在初始化设置");
     m_size = DEF_SIZE;
     m_doAutoAlign = DEF_DO_AUTO_ALIGN;
     m_timerInterval = TIMER_INTERVAL;
 
     read_settings();
+    write_log("设置对象已创建");
 }
 
 //读取设置

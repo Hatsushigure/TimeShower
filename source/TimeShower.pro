@@ -18,6 +18,7 @@ SOURCES += \
     settings.cpp \
     sidebar.cpp \
     timeevent.cpp \
+    timeeventmanager.cpp \
     timewidget.cpp
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     settings.h \
     sidebar.h \
     timeevent.h \
+    timeeventmanager.h \
     timeshower.h \
     timewidget.h
 

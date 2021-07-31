@@ -7,18 +7,26 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //初始化变量
     settings = new Settings;
-    settings->write_log("设置对象已创建");
+    settings->write_log("正在初始化时间表");
+    evMgr = new TimeEventManager(settings);
+    evMgr->connect_events(this);
+
     scrWid = QApplication::desktop()->width();
     scrHei = QApplication::desktop()->height();
-    settings->write_log(QString("成功获取屏幕宽高:").append(QString::number(scrWid)).append(", ").append(QString::number(scrHei)));
+    settings->write_log(QString("成功获取屏幕宽高:")+ QString::number(scrWid) + ", " + QString::number(scrHei));
+
     movable = false;
     settings->write_log("设置为不可移动");
+
     fstPos = QPoint();
     curTime = QTime();
+
     mainTimer = new QTimer(this);
     settings->write_log("计时器已创建");
+
     bck = new BackgroundWidget(scrWid, scrHei);
     settings->write_log("菜单背景窗体创建成功");
+
     sideBar = nullptr;
     trayIcon = nullptr;
     actionExit = new QAction("退出");
@@ -52,13 +60,14 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //创建托盘图标
     add_tray_icon();
+    qDebug() << "222";
 
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
     connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::slotHide);
     connect(actionShow, &QAction::triggered, this, &TimeWidget::slotShow);
-    connect(actionExit, &QAction::triggered, this, &QApplication::quit);
+    connect(actionExit, &QAction::triggered, this, &TimeWidget::slotExit);
     connect(actionHide, &QAction::triggered, this, &TimeWidget::slotHide);
     settings->write_log("信号和槽关联成功，初始化结束");
 
@@ -124,6 +133,16 @@ void TimeWidget::slotRestart()
 void TimeWidget::slotShowMessage(QString msg)
 {
     trayIcon->showMessage("来自\"TimeShower\"的消息", msg, APP_ICON);
+}
+
+//退出槽函数
+void TimeWidget::slotExit()
+{
+    delete trayIcon;
+    delete trayMenu;
+    delete sideBar;
+    delete bck;
+    QApplication::quit();
 }
 
 void TimeWidget::mousePressEvent(QMouseEvent* e)
@@ -213,12 +232,7 @@ void TimeWidget::on_mainTimer_timeOut()
     mainTimer->start();
     curTime = QTime::currentTime();
     ui->timeLabel->setText(curTime.toString());
-
-    if(curTime.hour() == 21 && curTime.minute() == 53 && curTime.second() == 0)
-    {
-        settings->write_log("检测是否自动关机:true");
-        system("shutdown -s -t 300");
-    }
+    evMgr->trigger();
 }
 
 void TimeWidget::on_bck_stpMoving()

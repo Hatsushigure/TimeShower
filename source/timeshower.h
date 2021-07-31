@@ -20,10 +20,15 @@
 #include <QLabel>
 #include <QSystemTrayIcon>
 #include <QMenu>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+
 
 //常量
 const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
 const QString SETTINGS_FILE_NAME = "settings.txt";
+const QString TIMETABLE_FILE_NAME = "timetable.json";
 const short SIZE_RATE = 8;   //尺寸比例
 const short APP_VERSION = 2;
 const QIcon APP_ICON(":/resources/appIcon.svg");
@@ -42,5 +47,8 @@ const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间
 enum class LogType {info, warning, error};
 enum class SideBarType {left, right};
 enum class TimeEventAction {showMessage, shutDown, restart, show, hide, exit, null};
+
+//对象
+
 
 #endif // TIMESHOWER_H
