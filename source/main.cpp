@@ -1,5 +1,3 @@
-#include <QTextCodec>
-#include <QApplication>
 #include "timewidget.h"
 
 int main(int argc, char *argv[])

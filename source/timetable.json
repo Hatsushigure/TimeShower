@@ -1,9 +1,10 @@
 [
     {
         "name":"Test Event",
-        "time":48600,
+        "time":59100,
         "actions":[
-            0
+            0,
+            1
         ],
         "message":"Message1!!!!!!!!!!!"
     },
