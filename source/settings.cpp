@@ -52,7 +52,7 @@ void Settings::read_settings()
                 }
                 else if(ret.startsWith("size"))    //读取窗口相对大小
                 {
-                    short val = ret.mid(ret.indexOf('=') + 1).toShort();
+                    double val = ret.midRef(ret.indexOf('=') + 1).toDouble();
                     m_size = val;
                 }
                 else if(ret.startsWith("doAutoAlign"))  //读取是否自动对齐

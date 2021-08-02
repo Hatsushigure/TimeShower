@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include "globalvariables.h"
 
 Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(parent), ui(new Ui::Dialog)
 {
@@ -22,6 +23,8 @@ Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(paren
 
     //安装事件过滤器
     ui->titleBar->installEventFilter(this);
+
+    settings->write_log("对话框\"" + this->objectName() + "\"已创建");
 }
 
 //事件过滤器
@@ -105,6 +108,7 @@ void Dialog::on_buttonWidget_clicked(QAbstractButton *button)
 {
     selected = button;
     hide();
+    settings->write_log("对话框\"" + this->objectName() + "\"关闭，选择了按钮\"" + selected->objectName() + "\"");
 }
 
 Dialog::~Dialog()

@@ -1,6 +1,4 @@
-#ifndef DIALOG_H
-#define DIALOG_H
-
+#pragma once
 #include "timeshower.h"
 
 namespace Ui {
@@ -41,5 +39,3 @@ private slots:
     void on_Dialog_windowTitleChanged(const QString &title);
     void on_buttonWidget_clicked(QAbstractButton *button);
 };
-
-#endif // DIALOG_H

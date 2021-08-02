@@ -28,7 +28,6 @@
 const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
 const QString SETTINGS_FILE_NAME = "settings.txt";
 const QString TIMETABLE_FILE_NAME = "timetable.json";
-const short SIZE_RATE = 8;   //尺寸比例
 const short APP_VERSION = 2;
 const QIcon APP_ICON(":/resources/appIcon.svg");
 
@@ -37,7 +36,7 @@ const short STD_TITLE_HEIGHT = 25;    //标准标题栏高度
 const short STD_MAX_WIDTH = 400;    //标准最大宽度
 }
 namespace DefaultSettings {
-const short DEF_SIZE = 1;
+const double DEF_SIZE = 0.125;
 const bool DEF_DO_AUTO_ALIGN = true;
 const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间内将为常量）
 }

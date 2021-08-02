@@ -7,10 +7,12 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //初始化变量
     settings = new Settings;
+
     settings->write_log("正在初始化时间表");
     evMgr = new TimeEventManager;
     evMgr->connect_events(this);
 
+    //以下3行将会修改
     scrWid = QApplication::desktop()->width();
     scrHei = QApplication::desktop()->height();
     settings->write_log(QString("成功获取屏幕宽高:")+ QString::number(scrWid) + ", " + QString::number(scrHei));
@@ -25,33 +27,34 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("计时器已创建");
 
     bck = new BackgroundWidget(scrWid, scrHei);
-    settings->write_log("菜单背景窗体创建成功");
 
     sideBar = nullptr;
+
     trayIcon = nullptr;
     actionExit = new QAction("退出");
     actionShow = new QAction("显示主界面");
     actionHide = new QAction("隐藏");
     trayMenu = new QMenu(this);
+    settings->write_log("系统托盘相关变量初始化完成");
 
     //窗口效果
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
-    settings->write_log("窗口特效设置完毕");
+    settings->write_log("主窗口特效设置完毕");
 
     //设置界面元素显示效果
     ui->timeLabel->setStyleSheet("color:#E0E0E0");
     ui->currentLabel->setStyleSheet("color:#F7F7F7");
     ui->eventLabel->setStyleSheet("color:yellow");
+    settings->write_log("字体颜色设置完毕");
 
     //移动及改变大小
     move(0, 0);
-    resize(scrWid * settings->size() / SIZE_RATE, scrHei * settings->size() / SIZE_RATE);
-    settings->write_log("窗口大小及位置初始化完毕");
+    resize(scrWid * settings->size(), scrHei * settings->size());
+    settings->write_log("主窗口大小及位置初始化完毕");
 
     //处理侧边栏
     sideBar = new SideBar(size(), this);
-    settings->write_log("菜单侧边栏创建成功");
 
     //处理计时器
     mainTimer->setInterval(settings->timerInterval());
@@ -60,12 +63,11 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //创建托盘图标
     add_tray_icon();
-    qDebug() << "222";
 
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
-    connect(sideBar, &SideBar::app_minimize, this, &TimeWidget::slotHide);
+    connect(sideBar, &SideBar::signalHide, this, &TimeWidget::slotHide);
     connect(actionShow, &QAction::triggered, this, &TimeWidget::slotShow);
     connect(actionExit, &QAction::triggered, this, &TimeWidget::slotExit);
     connect(actionHide, &QAction::triggered, this, &TimeWidget::slotHide);
@@ -93,7 +95,7 @@ void TimeWidget::add_tray_icon()
     settings->write_log("系统托盘图标创建成功");
 
     //测试
-    trayIcon->showMessage("title", "message", APP_ICON);
+    trayIcon->showMessage("A Test", "测试消息", APP_ICON);
 }
 
 //从托盘中唤起
@@ -111,6 +113,7 @@ void TimeWidget::slotHide()
     movable = false;
     hide();
     bck->hide();
+    sideBar->hide();
     actionShow->setEnabled(true);
     actionHide->setDisabled(true);
     settings->write_log("已最小化");
@@ -120,12 +123,14 @@ void TimeWidget::slotHide()
 //关机槽函数
 void TimeWidget::slotShutDown()
 {
+    settings->write_log("关机事件触发");
     system("shutdown -s -t 600");
 }
 
 //重启槽函数
 void TimeWidget::slotRestart()
 {
+    settings->write_log("重启事件触发");
     system("shutdown -r -t 600");
 }
 
@@ -133,11 +138,13 @@ void TimeWidget::slotRestart()
 void TimeWidget::slotShowMessage(QString msg)
 {
     trayIcon->showMessage("来自\"TimeShower\"的消息", msg, APP_ICON);
+    settings->write_log("已显示消息\"" + msg + "\"");
 }
 
 //退出槽函数
 void TimeWidget::slotExit()
 {
+    settings->write_log("退出事件触发");
     delete trayIcon;
     delete trayMenu;
     delete sideBar;
@@ -150,7 +157,7 @@ void TimeWidget::mousePressEvent(QMouseEvent* e)
     if(movable)
     {
         fstPos = e->globalPos();
-        settings->write_log("鼠标按下，开始移动");
+        settings->write_log("鼠标按下");
     }
 }
 
@@ -195,12 +202,6 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
             sideBar->setType(SideBarType::right);
         }
         sideBar->auto_move(pos(), size());
-
-        settings->write_log(QString("移动至:(")
-                            .append(QString::number(pos().x()))
-                            .append(",")
-                            .append(QString::number(pos().y()))
-                            .append(")"));
     }
 }
 
@@ -248,8 +249,8 @@ void TimeWidget::on_bck_stpMoving()
 void TimeWidget::auto_align(int aX, int aY)
 {
     //获取网格宽度和高度
-    double gridWid = double(scrWid) * double(settings->size()) / double(SIZE_RATE);
-    double gridHei = double(scrHei) * double(settings->size()) / double(SIZE_RATE);
+    double gridWid = scrWid * settings->size();
+    double gridHei = scrHei * settings->size();
 
     int gridX = aX / gridWid;
     int gridY = aY / gridHei;

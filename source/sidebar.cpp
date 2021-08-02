@@ -12,7 +12,7 @@ SideBar::SideBar(const QSize &parSize, QWidget *parent) : QWidget(parent), ui(ne
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    int tmp = parSize.width() / SIZE_RATE;
+    int tmp = parSize.width() / 8;  //待修复的magic number
     ui->minimizeButton->setIconSize(QSize(tmp, tmp));
     ui->settingsButton->setIconSize(QSize(tmp, tmp));
     ui->aboutButton->setIconSize(QSize(tmp, tmp));
@@ -20,26 +20,29 @@ SideBar::SideBar(const QSize &parSize, QWidget *parent) : QWidget(parent), ui(ne
     resize(tmp, parSize.height());
 
     hide();
+
+    settings->write_log("菜单侧边栏创建成功");
 }
 
 void SideBar::on_settingsButton_clicked()
 {
+    settings->write_log("“设置”按钮被点击");
+
     MessageBox inf(this, QApplication::desktop()->width(), "    暂时不提供图形设置界面!", "提示");
     inf.exec();
-
-    settings->write_log("设置按钮被点击");
 }
 
 void SideBar::on_minimizeButton_clicked()
 {
     settings->write_log("最小化按钮被点击");
-    hide();
+    emit signalHide();
     settings->write_log("已发送最小化信号");
-    emit app_minimize();
 }
 
 void SideBar::on_aboutButton_clicked()
 {
+    settings->write_log("“关于”按钮被点击");
+
     MessageBox about(this, QApplication::desktop()->width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.4\n    作者:czj_____", "关于 \"时间显示器\"");
     about.exec();
 }
@@ -68,6 +71,6 @@ void SideBar::setType(SideBarType tp)
 
 SideBar::~SideBar()
 {
-    settings->write_log("侧边栏被析构");
     delete ui;
+    settings->write_log("侧边栏被析构");
 }

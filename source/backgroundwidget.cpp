@@ -8,12 +8,15 @@ BackgroundWidget::BackgroundWidget(int aWid, int aHei) : ui(new Ui::BackgroundWi
     //窗口特效
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
+    settings->write_log("背景窗体特效设置成功");
 
     //窗口大小及位置
     resize(aWid, aHei);
     move(0, 0);
 
     hide();
+
+    settings->write_log("菜单背景窗体创建成功");
 }
 
 void BackgroundWidget::mousePressEvent(QMouseEvent* e)
@@ -35,4 +38,5 @@ void BackgroundWidget::paintEvent(QPaintEvent* e)
 BackgroundWidget::~BackgroundWidget()
 {
     delete ui;
+    settings->write_log("背景窗体被析构");
 }
