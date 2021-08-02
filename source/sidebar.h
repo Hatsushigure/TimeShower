@@ -2,8 +2,8 @@
 #define SIDEBAR_H
 
 #include "timeshower.h"
-#include "settings.h"
 #include "messagebox.h"
+#include "globalvariables.h"
 
 namespace Ui {
 class SideBar;
@@ -15,10 +15,9 @@ class SideBar : public QWidget
 
 private:
     Ui::SideBar *ui;
-    Settings* settings;
     SideBarType curType;
 public:
-    explicit SideBar(const QSize& parSize, Settings* st, QWidget *parent = nullptr);
+    explicit SideBar(const QSize& parSize, QWidget *parent = nullptr);
 
     //设置类型
     void setType(SideBarType tp);

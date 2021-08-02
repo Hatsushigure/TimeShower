@@ -2,7 +2,7 @@
 #define TIMEEVENTMANAGER_H
 #include "timeshower.h"
 #include "timeevent.h"
-#include "settings.h"
+#include "globalvariables.h"
 
 class TimeWidget;
 
@@ -10,11 +10,10 @@ class TimeEventManager : public QObject
 {
     Q_OBJECT
 private:
-    Settings* settings;
     QJsonDocument timetable;
     QList<TimeEvent*> events;
 public:
-    TimeEventManager(Settings* s);
+    TimeEventManager();
 
     //初始化事件列表
     void initialize_timetable();

@@ -1,12 +1,11 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
 
-SideBar::SideBar(const QSize &parSize, Settings* st, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
+SideBar::SideBar(const QSize &parSize, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
     ui->setupUi(this);
 
     //初始化变量
-    settings = st;
     curType = SideBarType::right;
 
     //窗口特效

@@ -4,8 +4,8 @@
 #include "timeshower.h"
 #include "backgroundwidget.h"
 #include "sidebar.h"
-#include "settings.h"
 #include "timeeventmanager.h"
+#include "globalvariables.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TimeWidget; }
@@ -70,7 +70,6 @@ private:
    int scrHei;
    BackgroundWidget* bck;
    SideBar* sideBar;
-   Settings* settings;
    QSystemTrayIcon* trayIcon;
    QAction* actionExit;
    QAction* actionShow;

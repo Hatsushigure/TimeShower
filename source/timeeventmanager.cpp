@@ -1,9 +1,8 @@
 #include "timeeventmanager.h"
 #include "timewidget.h"
 
-TimeEventManager::TimeEventManager(Settings* s)
+TimeEventManager::TimeEventManager()
 {
-    settings = s;
     QFile tmp(TIMETABLE_FILE_NAME);
     tmp.open(QFile::ReadOnly);
     timetable = QJsonDocument::fromJson(tmp.readAll());

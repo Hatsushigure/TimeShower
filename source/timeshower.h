@@ -1,6 +1,5 @@
-//此文件包含应用所有的常量、include、枚举
-#ifndef TIMESHOWER_H
-#define TIMESHOWER_H
+//此文件包含应用所有的常量、include、枚举、全局变量
+#pragma once
 //包含
 #include <QFile>
 #include <QMessageBox>
@@ -47,8 +46,3 @@ const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间
 enum class LogType {info, warning, error};
 enum class SideBarType {left, right};
 enum class TimeEventAction {showMessage, shutDown, restart, show, hide, exit, null};
-
-//对象
-
-
-#endif // TIMESHOWER_H

@@ -8,7 +8,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     //初始化变量
     settings = new Settings;
     settings->write_log("正在初始化时间表");
-    evMgr = new TimeEventManager(settings);
+    evMgr = new TimeEventManager;
     evMgr->connect_events(this);
 
     scrWid = QApplication::desktop()->width();
@@ -50,7 +50,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     settings->write_log("窗口大小及位置初始化完毕");
 
     //处理侧边栏
-    sideBar = new SideBar(size(), settings, this);
+    sideBar = new SideBar(size(), this);
     settings->write_log("菜单侧边栏创建成功");
 
     //处理计时器
