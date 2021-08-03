@@ -56,7 +56,7 @@ public:
     void slotExit();
 
     //自动对齐
-    void auto_align(int aX, int aY);
+    void auto_align(QPoint pos);
 
     ~TimeWidget();
 private:

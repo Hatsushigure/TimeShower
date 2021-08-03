@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "globalvariables.h"
 
 Settings::Settings()
 {
@@ -28,7 +29,7 @@ void Settings::read_settings()
     {
         write_log("文件不存在，恢复默认设置", LogType::warning);
 
-        MessageBox errMsg(nullptr, QApplication::desktop()->width(), "    设置文件不存在！", "无法读取设置");
+        QMessageBox errMsg(QMessageBox::Icon::Critical, "无法读取设置", "    设置文件不存在！");
         errMsg.exec();
 
         settingsFile->close();
@@ -52,7 +53,7 @@ void Settings::read_settings()
                 }
                 else if(ret.startsWith("size"))    //读取窗口相对大小
                 {
-                    double val = ret.midRef(ret.indexOf('=') + 1).toDouble();
+                    double val = ret.mid(ret.indexOf('=') + 1).toDouble();
                     m_size = val;
                 }
                 else if(ret.startsWith("doAutoAlign"))  //读取是否自动对齐
@@ -75,7 +76,7 @@ void Settings::read_settings()
     else    //无读取权限(基本不会)
     {
         write_log("无文件读取权限", LogType::error);
-        MessageBox errMsg(nullptr, QApplication::desktop()->width(), "    无文件读取权限，应用无法正常启动！\n\n    请手动处理权限问题后再启动", "无法读取设置");
+        MessageBox errMsg(nullptr, scrSize.width(), "    无文件读取权限，应用无法正常启动！\n\n    请手动处理权限问题后再启动", "无法读取设置");
         errMsg.exec();
         settingsFile->close();
     }

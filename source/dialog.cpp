@@ -35,15 +35,15 @@ bool Dialog::eventFilter(QObject* watch, QEvent* e)
         if(e->type() == QEvent::MouseButtonPress)
         {
             QMouseEvent* event = static_cast<QMouseEvent*>(e);
-            fstPos = event->globalPos();
+            fstPos = event->globalPosition().toPoint();
             return true;
         }
         if(e->type() == QEvent::MouseMove)
         {
             QMouseEvent* event = static_cast<QMouseEvent*>(e);
-            QPoint dP = event->globalPos() - fstPos;
+            QPoint dP = event->globalPosition().toPoint() - fstPos;
             move(pos() + dP);
-            fstPos = event->globalPos();
+            fstPos = event->globalPosition().toPoint();
             return true;
         }
     }

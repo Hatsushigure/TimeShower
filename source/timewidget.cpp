@@ -6,6 +6,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     ui->setupUi(this);
 
     //初始化变量
+    scrSize = QApplication::primaryScreen()->size();
     settings = new Settings;
 
     settings->write_log("正在初始化时间表");
@@ -13,8 +14,8 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     evMgr->connect_events(this);
 
     //以下3行将会修改
-    scrWid = QApplication::desktop()->width();
-    scrHei = QApplication::desktop()->height();
+    scrWid = scrSize.width();
+    scrHei = scrSize.height();
     settings->write_log(QString("成功获取屏幕宽高:")+ QString::number(scrWid) + ", " + QString::number(scrHei));
 
     movable = false;
@@ -156,7 +157,7 @@ void TimeWidget::mousePressEvent(QMouseEvent* e)
 {
     if(movable)
     {
-        fstPos = e->globalPos();
+        fstPos = e->globalPosition().toPoint();
         settings->write_log("鼠标按下");
     }
 }
@@ -165,9 +166,9 @@ void TimeWidget::mouseMoveEvent(QMouseEvent *e)
 {
     if(movable)
     {
-        QPoint dP = e->globalPos() - fstPos;
+        QPoint dP = e->globalPosition().toPoint() - fstPos;
         move(pos() + dP);
-        fstPos = e->globalPos();
+        fstPos = e->globalPosition().toPoint();
     }
 }
 
@@ -189,7 +190,7 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
         //自动对齐
         if(settings->doAutoAlign())
         {
-            auto_align(e->globalX(), e->globalY());
+            auto_align(e->globalPosition().toPoint());
         }
 
         //调整侧边栏位置
@@ -246,14 +247,14 @@ void TimeWidget::on_bck_stpMoving()
 
 
 //自动对齐
-void TimeWidget::auto_align(int aX, int aY)
+void TimeWidget::auto_align(QPoint pos)
 {
     //获取网格宽度和高度
     double gridWid = scrWid * settings->size();
     double gridHei = scrHei * settings->size();
 
-    int gridX = aX / gridWid;
-    int gridY = aY / gridHei;
+    int gridX = pos.x() / gridWid;
+    int gridY = pos.y() / gridHei;
     move(width() * gridX, height() * gridY);
     settings->write_log("已自动对齐至网格");
 }

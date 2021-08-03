@@ -15,7 +15,7 @@
 #include <QIcon>
 #include <QTimer>
 #include <QLayout>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QLabel>
 #include <QSystemTrayIcon>
 #include <QMenu>
