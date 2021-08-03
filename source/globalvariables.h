@@ -6,3 +6,5 @@
 extern Settings* settings;
 
 extern QSize scrSize;
+
+extern QIcon APP_ICON;

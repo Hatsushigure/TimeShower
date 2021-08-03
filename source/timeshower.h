@@ -29,7 +29,6 @@ const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
 const QString SETTINGS_FILE_NAME = "settings.txt";
 const QString TIMETABLE_FILE_NAME = "timetable.json";
 const short APP_VERSION = 2;
-const QIcon APP_ICON(":/resources/appIcon.svg");
 
 namespace DialogDefines {
 const short STD_TITLE_HEIGHT = 25;    //标准标题栏高度

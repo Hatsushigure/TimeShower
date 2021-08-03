@@ -6,9 +6,6 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     ui->setupUi(this);
 
     //初始化变量
-    scrSize = QApplication::primaryScreen()->size();
-    settings = new Settings;
-
     settings->write_log("正在初始化时间表");
     evMgr = new TimeEventManager;
     evMgr->connect_events(this);
