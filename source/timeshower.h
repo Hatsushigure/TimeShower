@@ -41,6 +41,5 @@ const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间
 }
 
 //枚举
-enum class LogType {info, warning, error};
 enum class SideBarType {left, right};
 enum class TimeEventAction {showMessage, shutDown, restart, show, hide, exit, null};

@@ -9,7 +9,7 @@ TimeEventManager::TimeEventManager()
     tmp.close();
     initialize_timetable();
 
-    settings->write_log("时间表初始化完成");
+    write_log("时间表初始化完成");
 }
 
 //初始化事件列表
@@ -40,7 +40,7 @@ void TimeEventManager::initialize_timetable()
 //关联事件的信号
 void TimeEventManager::connect_events(TimeWidget* parent)
 {
-    settings->write_log("正在关联时间表与对应操作");
+    write_log("正在关联时间表与对应操作");
 
     for(auto i = events.begin(); i != events.end(); i++)
     {
@@ -52,7 +52,7 @@ void TimeEventManager::connect_events(TimeWidget* parent)
         connect(*i, &TimeEvent::signalShutDown, parent, &TimeWidget::slotShutDown);
     }
 
-    settings->write_log("关联结束");
+    write_log("关联结束");
 }
 
 //触发事件

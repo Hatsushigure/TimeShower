@@ -6,13 +6,8 @@ Settings::Settings()
     using namespace DefaultSettings;
 
     //初始化变量
-    settingsFile = new QFile(SETTINGS_FILE_NAME);
-    logFile = new QFile(QDate::currentDate().toString("yyyy-MM-dd")
-                        .append('-')
-                        .append(QTime::currentTime().toString("HH-mm-ss"))
-                        .append(".log"));
-    write_log("成功创建日志文件");
     write_log("正在初始化设置");
+    settingsFile = new QFile(SETTINGS_FILE_NAME);
     m_size = DEF_SIZE;
     m_doAutoAlign = DEF_DO_AUTO_ALIGN;
     m_timerInterval = TIMER_INTERVAL;
@@ -27,7 +22,7 @@ void Settings::read_settings()
     write_log("正在读取设置...");
     if(!settingsFile->exists()) //文件不存在
     {
-        write_log("文件不存在，恢复默认设置", LogType::warning);
+        write_log("文件不存在，恢复默认设置");
 
         QMessageBox errMsg(QMessageBox::Icon::Critical, "无法读取设置", "    设置文件不存在！");
         errMsg.exec();
@@ -68,14 +63,14 @@ void Settings::read_settings()
 
         if(oldSettings)
         {
-            write_log("检测到旧版设置文件，将更新格式", LogType::warning);
+            write_log("检测到旧版设置文件，将更新格式");
             write_settings();
             write_log("格式更新成功");
         }
     }
     else    //无读取权限(基本不会)
     {
-        write_log("无文件读取权限", LogType::error);
+        write_log("无文件读取权限");
         MessageBox errMsg(nullptr, scrSize.width(), "    无文件读取权限，应用无法正常启动！\n\n    请手动处理权限问题后再启动", "无法读取设置");
         errMsg.exec();
         settingsFile->close();
@@ -87,7 +82,7 @@ void Settings::write_default_settings()
 {
     using namespace DefaultSettings;
 
-    write_log("正在写入默认设置", LogType::warning);
+    write_log("正在写入默认设置");
 
     settingsFile->open(QFile::WriteOnly);
     //注释
@@ -118,28 +113,4 @@ void Settings::write_settings()
     settingsFile->write(std::string("doAutoAlign = ").append(std::to_string(m_doAutoAlign)).c_str());
 
     settingsFile->close();
-}
-
-//写日志
-void Settings::write_log(const QString &text, LogType tp)
-{
-    QString tmp = "[";
-    tmp.append(QTime::currentTime().toString());
-    switch(tp)
-    {
-    case LogType::info:
-        tmp.append(", 信息] ").append(text).append('\n');
-        break;
-    case LogType::warning:
-        tmp.append(", 警告] ").append(text).append('\n');
-        break;
-    case LogType::error:
-        tmp.append(", 错误] ").append(text).append('\n');
-        break;
-    default:
-        break;
-    }
-    logFile->open(QFile::ReadWrite | QFile::Append);
-    logFile->write(tmp.toUtf8());
-    logFile->close();
 }

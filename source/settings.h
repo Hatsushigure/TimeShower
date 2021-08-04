@@ -21,9 +21,6 @@ public:
     //写入设置
     void write_settings();
 
-    //写日志
-    void write_log(const QString& text, LogType tp = LogType::info);
-
     double size() {return m_size;}
     short timerInterval() {return m_timerInterval;}
     bool doAutoAlign() {return m_doAutoAlign;}
