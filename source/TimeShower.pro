@@ -14,7 +14,7 @@ RC_ICONS = ./resources/appIcon.ico
 SOURCES += \
     backgroundwidget.cpp \
     dialog.cpp \
-    globalvariables.cpp \
+    globals.cpp \
     main.cpp \
     messagebox.cpp \
     settings.cpp \
@@ -26,7 +26,7 @@ SOURCES += \
 HEADERS += \
     backgroundwidget.h \
     dialog.h \
-    globalvariables.h \
+    globals.h \
     messagebox.h \
     settings.h \
     sidebar.h \

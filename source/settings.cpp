@@ -1,5 +1,5 @@
 #include "settings.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 Settings::Settings()
 {

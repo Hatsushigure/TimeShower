@@ -1,6 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(parent), ui(new Ui::Dialog)
 {

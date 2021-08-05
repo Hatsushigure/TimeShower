@@ -8,6 +8,10 @@ int main(int argc, char *argv[])
                         .append(".log"));
     write_log("成功创建日志文件");
     QApplication a(argc, argv);
+    if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    {
+        QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Floor);
+    }
     scrSize = a.primaryScreen()->size();
     settings = new Settings;
     appIcon.addFile(":/resources/appIcon.svg");

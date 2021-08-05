@@ -1,11 +1,9 @@
-#ifndef TIMEWIDGET_H
-#define TIMEWIDGET_H
-
+#pragma once
 #include "timeshower.h"
 #include "backgroundwidget.h"
 #include "sidebar.h"
 #include "timeeventmanager.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TimeWidget; }
@@ -14,7 +12,23 @@ QT_END_NAMESPACE
 class TimeWidget : public QWidget
 {
     Q_OBJECT
+private:
+    Ui::TimeWidget *ui;
 
+   bool movable;
+   QPoint fstPos;
+   QTime curTime;
+   QTimer* mainTimer;
+   int scrWid;
+   int scrHei;
+   BackgroundWidget* bck;
+   SideBar* sideBar;
+   QSystemTrayIcon* trayIcon;
+   QAction* actionExit;
+   QAction* actionShow;
+   QAction* actionHide;
+   QMenu* trayMenu;
+   TimeEventManager* evMgr;
 public:
     TimeWidget(QWidget *parent = nullptr);
 
@@ -59,22 +73,4 @@ public:
     void auto_align(QPoint pos);
 
     ~TimeWidget();
-private:
-    Ui::TimeWidget *ui;
-
-   bool movable;
-   QPoint fstPos;
-   QTime curTime;
-   QTimer* mainTimer;
-   int scrWid;
-   int scrHei;
-   BackgroundWidget* bck;
-   SideBar* sideBar;
-   QSystemTrayIcon* trayIcon;
-   QAction* actionExit;
-   QAction* actionShow;
-   QAction* actionHide;
-   QMenu* trayMenu;
-   TimeEventManager* evMgr;
 };
-#endif

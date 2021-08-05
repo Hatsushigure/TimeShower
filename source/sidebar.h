@@ -3,7 +3,7 @@
 
 #include "timeshower.h"
 #include "messagebox.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 namespace Ui {
 class SideBar;
@@ -24,6 +24,8 @@ public:
 
     //自动移动
     void auto_move(QPoint aPos, QSize aWH);    //后一个参数代表父窗体的宽高
+
+    void paintEvent(QPaintEvent* e);
 
     ~SideBar();
 

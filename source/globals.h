@@ -11,3 +11,5 @@ extern QFile* logFile;
 //全局函数
 //写日志
 void write_log(const QString& text);
+//画圆角
+void fillet_widget(QWidget* wid);

@@ -1,8 +1,7 @@
-#ifndef TIMEEVENTMANAGER_H
-#define TIMEEVENTMANAGER_H
+#pragma once
 #include "timeshower.h"
 #include "timeevent.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 class TimeWidget;
 
@@ -27,5 +26,3 @@ public:
     //触发事件
     void trigger();
 };
-
-#endif // TIMEEVENTMANAGER_H

@@ -200,6 +200,8 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
             sideBar->setType(SideBarType::right);
         }
         sideBar->auto_move(pos(), size());
+
+        write_log("移动至：(" + QString::number(x()) + ", " + QString::number(y()) + ")");
     }
 }
 
@@ -217,13 +219,7 @@ void TimeWidget::moveEvent(QMoveEvent* e)
 void TimeWidget::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e);
-
-    QPainter painter(this);
-
-    //绘制背景
-    QPixmap tmp(":/resources/background.png");
-    painter.setOpacity(0.3);
-    painter.drawPixmap(QRect(0, 0, width(), height()), tmp);
+    fillet_widget(this);
 }
 
 void TimeWidget::on_mainTimer_timeOut()
@@ -252,8 +248,11 @@ void TimeWidget::auto_align(QPoint pos)
 
     int gridX = pos.x() / gridWid;
     int gridY = pos.y() / gridHei;
-    move(width() * gridX, height() * gridY);
+    int aX = width() * gridX;
+    int aY = height() * gridY;
+    move(aX, aY);
     write_log("已自动对齐至网格");
+    qDebug() << gridX << "  " << gridY;
 }
 
 TimeWidget::~TimeWidget()

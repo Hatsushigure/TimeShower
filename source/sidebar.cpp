@@ -69,6 +69,12 @@ void SideBar::setType(SideBarType tp)
     curType = tp;
 }
 
+void SideBar::paintEvent(QPaintEvent* e)
+{
+    Q_UNUSED(e)
+    fillet_widget(this);
+}
+
 SideBar::~SideBar()
 {
     delete ui;

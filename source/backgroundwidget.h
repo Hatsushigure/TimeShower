@@ -1,6 +1,6 @@
 #pragma once
 #include "timeshower.h"
-#include "globalvariables.h"
+#include "globals.h"
 
 namespace Ui {
 class BackgroundWidget;

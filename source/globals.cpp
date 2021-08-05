@@ -1,4 +1,4 @@
-#include "globalvariables.h"
+#include "globals.h"
 
 //全局变量
 Settings* settings;
@@ -16,4 +16,16 @@ void write_log(const QString &text)
     logFile->open(QFile::ReadWrite | QFile::Append);
     logFile->write(tmp.toUtf8());
     logFile->close();
+}
+//画圆角
+void fillet_widget(QWidget* wid)
+{
+    QPainter ptr(wid);
+
+    ptr.setRenderHint(QPainter::Antialiasing);
+    QPen pen(QColor(160, 160, 160));
+    QBrush brush(QColor(220, 220, 220, 100));
+    ptr.setPen(pen);
+    ptr.setBrush(brush);
+    ptr.drawRoundedRect(wid->rect(), 10, 10);
 }
