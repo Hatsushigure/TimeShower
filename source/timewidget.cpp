@@ -93,8 +93,8 @@ void TimeWidget::add_tray_icon()
     write_log("系统托盘图标创建成功");
 
     //测试
-    trayIcon->showMessage("A Test", "测试消息", appIcon);
-	shutdown_prerock();
+	//trayIcon->showMessage("A Test", "测试消息", appIcon);
+	//shutdown_prerock();
 }
 
 //从托盘中唤起
