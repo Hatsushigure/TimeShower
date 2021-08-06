@@ -19,7 +19,6 @@ Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(paren
     setWindowFlag(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
     ui->titleBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->contentWidget->setStyleSheet("background-color : #F9F9F9");
     ui->buttonWidget->setAttribute(Qt::WA_TranslucentBackground);
 
     //改标题
@@ -50,6 +49,19 @@ bool Dialog::eventFilter(QObject* watch, QEvent* e)
             fstPos = event->globalPosition().toPoint();
             return true;
         }
+		if(e->type() == QEvent::Paint)
+		{
+			Q_UNUSED(e)
+			QWidget* wid = static_cast<QWidget*>(watch);
+			round_corner(wid, QColor(238, 238, 238));
+			QPainter painter(wid);
+			painter.setPen(QPen(QColor(160, 160, 160)));
+			painter.setBrush(QBrush(QColor(238, 238, 238)));
+			painter.drawRect(0, 5, wid->width(), wid->height() - 5);
+			painter.setPen(QColor(238, 238, 238));
+			painter.drawLine(1, 5, wid->width() - 1, 5);
+
+		}
     }
     return false;
 }
@@ -124,7 +136,7 @@ QPushButton *Dialog::add_button(const QString &text)
 void Dialog::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
-    round_corner(this, QColor(238, 238, 238));
+	round_corner(this, QColor(249, 249, 249));
 }
 
 Dialog::~Dialog()
