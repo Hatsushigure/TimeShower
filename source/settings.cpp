@@ -57,6 +57,11 @@ void Settings::read_settings()
                     bool val = ret.mid(ret.indexOf('=') + 1).toShort();
                     m_doAutoAlign = val;
                 }
+				else if(ret.startsWith("shutDownPrerock"))  //读取关机前摇
+				{
+					short val = ret.mid(ret.indexOf('=') + 1).toShort();
+					m_shutdownPrerock = val;
+				}
             }
         }
         settingsFile->close();
@@ -94,6 +99,8 @@ void Settings::write_default_settings()
     settingsFile->write(std::string("size = ").append(std::to_string(DEF_SIZE)).append("\n").c_str());
     //是否自动对齐
     settingsFile->write(std::string("doAutoAlign = ").append(std::to_string(DEF_DO_AUTO_ALIGN)).append("\n").c_str());
+	//关机前摇
+	settingsFile->write(std::string("shutDownPrerock = ").append(std::to_string(DEF_SHUTDOWN_PREROCK)).append("\n").c_str());
 
     settingsFile->close();
 }
@@ -112,6 +119,8 @@ void Settings::write_settings()
     settingsFile->write(std::string("size = ").append(std::to_string(m_size)).c_str());
     //是否自动对齐
     settingsFile->write(std::string("doAutoAlign = ").append(std::to_string(m_doAutoAlign)).c_str());
+	//关机前摇
+	settingsFile->write(std::string("shutDownPrerock = ").append(std::to_string(m_shutdownPrerock)).append("\n").c_str());
 
     settingsFile->close();
 }

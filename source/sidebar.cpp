@@ -44,7 +44,7 @@ void SideBar::on_aboutButton_clicked()
 {
     write_log("“关于”按钮被点击");
 
-    MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.4\n    作者:czj_____", "关于 \"时间显示器\"");
+	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.2\n    作者:czj_____", "关于 \"时间显示器\"");
     QPushButton* btn = about.add_button("关于Qt");
     about.add_button("确定");
     about.exec();
