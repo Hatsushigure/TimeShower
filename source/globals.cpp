@@ -18,13 +18,13 @@ void write_log(const QString &text)
     logFile->close();
 }
 //画圆角
-void fillet_widget(QWidget* wid)
+void round_corner(QWidget* wid, QColor col)
 {
     QPainter ptr(wid);
 
     ptr.setRenderHint(QPainter::Antialiasing);
     QPen pen(QColor(160, 160, 160));
-    QBrush brush(QColor(220, 220, 220, 100));
+    QBrush brush(col);
     ptr.setPen(pen);
     ptr.setBrush(brush);
     ptr.drawRoundedRect(wid->rect(), 10, 10);

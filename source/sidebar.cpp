@@ -29,6 +29,7 @@ void SideBar::on_settingsButton_clicked()
     write_log("“设置”按钮被点击");
 
     MessageBox inf(this, scrSize.width(), "    暂时不提供图形设置界面!", "提示");
+    inf.add_button("确定");
     inf.exec();
 }
 
@@ -44,7 +45,13 @@ void SideBar::on_aboutButton_clicked()
     write_log("“关于”按钮被点击");
 
     MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.1.4\n    作者:czj_____", "关于 \"时间显示器\"");
+    QPushButton* btn = about.add_button("关于Qt");
+    about.add_button("确定");
     about.exec();
+    if(about.get_button() == btn)
+    {
+        QApplication::aboutQt();
+    }
 }
 
 //自动移动
@@ -72,7 +79,7 @@ void SideBar::setType(SideBarType tp)
 void SideBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
-    fillet_widget(this);
+    round_corner(this, QColor(220, 220, 220, 100));
 }
 
 SideBar::~SideBar()

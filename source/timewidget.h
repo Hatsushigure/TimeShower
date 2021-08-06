@@ -19,6 +19,7 @@ private:
    QPoint fstPos;
    QTime curTime;
    QTimer* mainTimer;
+   QTimer* shutDownTimer;
    int scrWid;
    int scrHei;
    BackgroundWidget* bck;
@@ -71,6 +72,9 @@ public:
 
     //自动对齐
     void auto_align(QPoint pos);
+
+	//真·关机前摇
+	void shutdown_prerock();
 
     ~TimeWidget();
 };

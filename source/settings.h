@@ -9,6 +9,7 @@ private:
     double m_size;
     short m_timerInterval;
     bool m_doAutoAlign;
+	short m_shutdownPrerock;
 public:
     Settings();
 
@@ -24,4 +25,5 @@ public:
     double size() {return m_size;}
     short timerInterval() {return m_timerInterval;}
     bool doAutoAlign() {return m_doAutoAlign;}
+	short shutdownPrerock() {return m_shutdownPrerock;}
 };

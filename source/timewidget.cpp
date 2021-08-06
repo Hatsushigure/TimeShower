@@ -94,6 +94,7 @@ void TimeWidget::add_tray_icon()
 
     //测试
     trayIcon->showMessage("A Test", "测试消息", appIcon);
+	shutdown_prerock();
 }
 
 //从托盘中唤起
@@ -219,7 +220,7 @@ void TimeWidget::moveEvent(QMoveEvent* e)
 void TimeWidget::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e);
-    fillet_widget(this);
+    round_corner(this, QColor(220, 220, 220, 100));
 }
 
 void TimeWidget::on_mainTimer_timeOut()
@@ -252,7 +253,39 @@ void TimeWidget::auto_align(QPoint pos)
     int aY = height() * gridY;
     move(aX, aY);
     write_log("已自动对齐至网格");
-    qDebug() << gridX << "  " << gridY;
+	qDebug() << gridX << "  " << gridY;
+}
+
+//真·关机前摇
+void TimeWidget::shutdown_prerock()
+{
+	Dialog dlg(bck, scrSize.width(), "关机提示");
+	dlg.resize(scrSize);
+	QLabel content("您将在" + QString::number(settings->shutdownPrerock()) + "秒后被注销\n请保存好当前未完成的工作！");
+	content.setFont(QFont("微软雅黑", 30, 1));
+	//content.setWordWrap(true);
+	content.setAlignment(Qt::AlignHCenter);
+	content.adjustSize();
+	dlg.setContent(&content);
+	dlg.add_button("确定");
+	QPushButton* btnShudown = dlg.add_button("我想现在关机");
+	dlg.add_button("我想让电脑蓝瓶钙");
+
+	shutDownTimer = new QTimer;
+	shutDownTimer->start(settings->shutdownPrerock() * 1000);
+	connect(shutDownTimer, &QTimer::timeout, this, [](){
+		system("shutdown -s -t 0");
+	});
+	write_log("关机计时器已创建");
+
+	bck->show();
+	dlg.exec();
+	bck->hide();
+
+	if(dlg.get_button() == btnShudown)
+	{
+		system("shutdown -s -t 0");
+	}
 }
 
 TimeWidget::~TimeWidget()

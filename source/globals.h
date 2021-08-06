@@ -12,4 +12,4 @@ extern QFile* logFile;
 //写日志
 void write_log(const QString& text);
 //画圆角
-void fillet_widget(QWidget* wid);
+void round_corner(QWidget* wid, QColor col);

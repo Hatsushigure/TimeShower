@@ -17,6 +17,10 @@ Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(paren
 
     //窗口特效
     setWindowFlag(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
+    ui->titleBar->setAttribute(Qt::WA_TranslucentBackground);
+    ui->contentWidget->setStyleSheet("background-color : #F9F9F9");
+    ui->buttonWidget->setAttribute(Qt::WA_TranslucentBackground);
 
     //改标题
     setWindowTitle(aTitle);
@@ -24,7 +28,7 @@ Dialog::Dialog(QWidget *parent, int aWid, const QString &aTitle) : QDialog(paren
     //安装事件过滤器
     ui->titleBar->installEventFilter(this);
 
-    write_log("对话框\"" + this->objectName() + "\"已创建");
+    write_log("对话框\"" + this->windowTitle() + "\"已创建");
 }
 
 //事件过滤器
@@ -106,12 +110,25 @@ void Dialog::on_Dialog_windowTitleChanged(const QString &title)
 //底部按钮点击
 void Dialog::on_buttonWidget_clicked(QAbstractButton *button)
 {
-    selected = button;
+    selected = static_cast<QPushButton*>(button);
     hide();
-    write_log("对话框\"" + this->objectName() + "\"关闭，选择了按钮\"" + selected->objectName() + "\"");
+    write_log("对话框\"" + this->windowTitle() + "\"关闭，选择了按钮\"" + selected->text() + "\"");
+}
+
+//添加按钮
+QPushButton *Dialog::add_button(const QString &text)
+{
+    return ui->buttonWidget->addButton(text, QDialogButtonBox::NoRole);
+}
+
+void Dialog::paintEvent(QPaintEvent* e)
+{
+    Q_UNUSED(e)
+    round_corner(this, QColor(238, 238, 238));
 }
 
 Dialog::~Dialog()
 {
-    delete ui;
+	qDeleteAll(ui->buttonWidget->buttons());
+	delete ui;
 }

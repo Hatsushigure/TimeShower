@@ -14,7 +14,7 @@ private:
     QPoint fstPos;
     double zoomRate;
     QWidget* m_content;
-    QAbstractButton* selected;
+    QPushButton* selected;
 public:
     explicit Dialog(QWidget* parent, int aWid, const QString& aTitle);
 
@@ -31,7 +31,12 @@ public:
     QWidget* content() {return m_content;}
 
     //返回当前选中的按钮
-    QAbstractButton* get_button() {return selected;}
+    QPushButton* get_button() {return selected;}
+
+    //添加按钮
+    QPushButton* add_button(const QString& text);
+
+    void paintEvent(QPaintEvent* e);
 
     ~Dialog();
 private slots:

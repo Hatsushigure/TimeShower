@@ -38,6 +38,7 @@ namespace DefaultSettings {
 const double DEF_SIZE = 0.125;
 const bool DEF_DO_AUTO_ALIGN = true;
 const short TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间内将为常量）
+const short DEF_SHUTDOWN_PREROCK = 300;	//关机前摇长度
 }
 
 //枚举

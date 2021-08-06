@@ -14,9 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#titleBar, QWidget#contentWidget{
-	background-color : #EEEEEE;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="titleBar" native="true">
    <property name="geometry">
@@ -98,7 +96,7 @@
     <string notr="true"/>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::No|QDialogButtonBox::Ok</set>
+    <set>QDialogButtonBox::NoButton</set>
    </property>
   </widget>
  </widget>

@@ -11,6 +11,7 @@ Settings::Settings()
     m_size = DEF_SIZE;
     m_doAutoAlign = DEF_DO_AUTO_ALIGN;
     m_timerInterval = TIMER_INTERVAL;
+	m_shutdownPrerock = DEF_SHUTDOWN_PREROCK;
 
     read_settings();
     write_log("设置对象已创建");
