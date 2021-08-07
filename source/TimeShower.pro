@@ -10,6 +10,11 @@ CONFIG += c++11
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 RC_ICONS = ./resources/appIcon.ico
+VERSION = 1.2
+QMAKE_TARGET_PRODUCT = TimeShower
+QMAKE_TARGET_COMPANY = czj_____
+QMAKE_TARGET_DESCRIPTION = TimeShower
+QMAKE_TARGET_COPYRIGHT = czj_____
 
 SOURCES += \
     backgroundwidget.cpp \
