@@ -123,7 +123,7 @@ void TimeWidget::slotHide()
 void TimeWidget::slotShutDown()
 {
     write_log("关机事件触发");
-    system("shutdown -s -t 600");
+	shutdown_prerock();
 }
 
 //重启槽函数
