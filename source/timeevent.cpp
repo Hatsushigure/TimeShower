@@ -30,35 +30,38 @@ void TimeEvent::trigger()
 {
     QTime tm = QTime::currentTime();
     int tmNum = tm.hour() * 3600 + tm.minute() * 60 + tm.second();
-    if(check_time(tmNum))
-    {
-        for(auto i = actions.begin(); i != actions.end(); i++)
-        {
-            if(*i == TimeEventAction::exit)
-            {
-                emit signalExit();
-            }
-            else if(*i == TimeEventAction::hide)
-            {
-                emit signalHide();
-            }
-            else if(*i == TimeEventAction::restart)
-            {
-                emit signalRestart();
-            }
-            else if(*i == TimeEventAction::show)
-            {
-                emit signalShow();
-            }
-            else if(*i == TimeEventAction::showMessage)
-            {
-                emit signalShowMessage(message);
-            }
-            else if(*i == TimeEventAction::shutDown)
-            {
-                emit signalShutDown();
-            }
-        }
-        triggered = true;
-    }
+	if (time > tmNum)
+	{
+		return;
+	}
+	else if (check_time(tmNum))
+	{
+		for(auto i = actions.begin(); i != actions.end(); i++)
+		{
+			switch (*i)
+			{
+			case TimeEventAction::exit:
+				emit signalExit();
+				break;
+			case TimeEventAction::hide:
+				emit signalHide();
+				break;
+			case TimeEventAction::restart:
+				emit signalRestart();
+				break;
+			case TimeEventAction::show:
+				emit signalShow();
+				break;
+			case TimeEventAction::showMessage:
+				emit signalShowMessage(message);
+				break;
+			case TimeEventAction::shutDown:
+				emit signalShutDown();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	triggered = true;
 }
