@@ -50,6 +50,7 @@ void TimeEventManager::connect_events(TimeWidget* parent)
         connect(*i, &TimeEvent::signalShow, parent, &TimeWidget::slotShow);
         connect(*i, &TimeEvent::signalShowMessage, parent, &TimeWidget::slotShowMessage);
         connect(*i, &TimeEvent::signalShutDown, parent, &TimeWidget::slotShutDown);
+		connect(this, &TimeEventManager::eventChanged, parent, &TimeWidget::slotEventChanged);
     }
 
     write_log("关联结束");
@@ -63,7 +64,8 @@ void TimeEventManager::trigger()
         (*events.begin())->trigger();
         if((*events.begin())->isTriggered())
         {
-            delete (*events.begin());
+			emit eventChanged((*events.begin())->name());
+			delete (*events.begin());
             events.pop_front();
         }
     }

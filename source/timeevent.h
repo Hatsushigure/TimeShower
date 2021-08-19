@@ -16,7 +16,7 @@ public:
     TimeEvent(QString aName, int aTime, const QList<TimeEventAction>* aActions, QString aMessage);
 
     //获取事件名称
-    QString name() {return m_name;}
+	QString name() const {return m_name;}
 
     //检测时间
     bool check_time(int curTime);

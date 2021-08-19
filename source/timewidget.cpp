@@ -151,6 +151,15 @@ void TimeWidget::slotExit()
     QApplication::quit();
 }
 
+//事件变更槽函数
+void TimeWidget::slotEventChanged(QString name)
+{
+	ui->eventLabel->setText(name);
+
+	//写日志
+	write_log("当前事件:" + name);
+}
+
 void TimeWidget::mousePressEvent(QMouseEvent* e)
 {
     if(movable)

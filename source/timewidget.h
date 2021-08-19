@@ -70,6 +70,9 @@ public:
     //退出槽函数
     void slotExit();
 
+	//事件变更槽函数
+	void slotEventChanged(QString name);
+
     //自动对齐
     void auto_align(QPoint pos);
 

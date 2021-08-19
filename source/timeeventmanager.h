@@ -20,9 +20,8 @@ public:
     //关联事件的信号
     void connect_events(TimeWidget* parent);
 
-    //获取下一事件
-    TimeEvent* next_event() {return *events.begin();}
-
     //触发事件
     void trigger();
+signals:
+	void eventChanged(QString name);
 };
