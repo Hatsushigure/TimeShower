@@ -13,15 +13,16 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
     setAttribute(Qt::WA_TranslucentBackground);
 
 	//初始化大小
-	resize(scale(size()));
-	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
-	QSize tmp(width(), width());
+	int marginL = layout()->contentsMargins().left();
+	QSize tmp(width() - 2 * marginL, width() - 2 * marginL);
 	ui->minimizeButton->setIconSize(tmp);
 	ui->aboutButton->setIconSize(tmp);
 	ui->settingsButton->setIconSize(tmp);
-	ui->minimizeButton->resize(tmp);
-	ui->aboutButton->resize(tmp);
-	ui->settingsButton->resize(tmp);
+	//ui->minimizeButton->resize(tmp);
+	//ui->aboutButton->resize(tmp);
+	//ui->settingsButton->resize(tmp);
+	resize(scale(size()));
+	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
 
     hide();
 
