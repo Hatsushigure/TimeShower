@@ -48,11 +48,12 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //移动及改变大小
     move(0, 0);
-    resize(scrWid * settings->size(), scrHei * settings->size());
+	resize(scale(size()));
+	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
     write_log("主窗口大小及位置初始化完毕");
 
     //处理侧边栏
-    sideBar = new SideBar(size(), this);
+	sideBar = new SideBar(this);
 
     //处理计时器
     mainTimer->setInterval(settings->timerInterval());

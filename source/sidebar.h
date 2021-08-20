@@ -17,7 +17,7 @@ private:
     Ui::SideBar *ui;
     SideBarType curType;
 public:
-    explicit SideBar(const QSize& parSize, QWidget *parent = nullptr);
+	explicit SideBar(QWidget *parent = nullptr);
 
     //设置类型
     void setType(SideBarType tp);

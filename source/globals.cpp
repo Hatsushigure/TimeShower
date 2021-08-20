@@ -17,6 +17,7 @@ void write_log(const QString &text)
     logFile->write(tmp.toUtf8());
     logFile->close();
 }
+
 //画圆角
 void round_corner(QWidget* wid, QColor col)
 {
@@ -28,4 +29,16 @@ void round_corner(QWidget* wid, QColor col)
     ptr.setPen(pen);
     ptr.setBrush(brush);
     ptr.drawRoundedRect(wid->rect(), 10, 10);
+}
+
+//缩放
+QSize scale(const QSize origin)
+{
+	double rate = scrSize.width() / STD_SCR_WIDTH;
+	return origin * rate;
+}
+int scale(const int origin)
+{
+	double rate = scrSize.width() / STD_SCR_WIDTH;
+	return origin * rate;
 }

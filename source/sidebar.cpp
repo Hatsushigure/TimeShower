@@ -1,23 +1,27 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
 
-SideBar::SideBar(const QSize &parSize, QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
+SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
     ui->setupUi(this);
 
     //初始化变量
-    curType = SideBarType::right;
+	curType = SideBarType::right;
 
     //窗口特效
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    int tmp = parSize.width() / 8;  //待修复的magic number
-    ui->minimizeButton->setIconSize(QSize(tmp, tmp));
-    ui->settingsButton->setIconSize(QSize(tmp, tmp));
-    ui->aboutButton->setIconSize(QSize(tmp, tmp));
-
-    resize(tmp, parSize.height());
+	//初始化大小
+	resize(scale(size()));
+	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
+	QSize tmp(width(), width());
+	ui->minimizeButton->setIconSize(tmp);
+	ui->aboutButton->setIconSize(tmp);
+	ui->settingsButton->setIconSize(tmp);
+	ui->minimizeButton->resize(tmp);
+	ui->aboutButton->resize(tmp);
+	ui->settingsButton->resize(tmp);
 
     hide();
 
@@ -44,7 +48,7 @@ void SideBar::on_aboutButton_clicked()
 {
     write_log("“关于”按钮被点击");
 
-	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.2.2\n    作者:czj_____", "关于 \"时间显示器\"");
+	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.2.3\n    作者:czj_____", "关于 \"时间显示器\"");
     QPushButton* btn = about.add_button("关于Qt");
     about.add_button("确定");
     about.exec();
