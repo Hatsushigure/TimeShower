@@ -27,7 +27,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     mainTimer = new QTimer(this);
     write_log("计时器已创建");
 
-    bck = new BackgroundWidget(scrWid, scrHei);
+	bck = new BackgroundWidget();
 
     sideBar = nullptr;
 

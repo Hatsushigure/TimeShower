@@ -1,7 +1,7 @@
 #include "backgroundwidget.h"
 #include "ui_backgroundwidget.h"
 
-BackgroundWidget::BackgroundWidget(int aWid, int aHei) : ui(new Ui::BackgroundWidget)
+BackgroundWidget::BackgroundWidget() : ui(new Ui::BackgroundWidget)
 {
     ui->setupUi(this);
 
@@ -11,7 +11,7 @@ BackgroundWidget::BackgroundWidget(int aWid, int aHei) : ui(new Ui::BackgroundWi
     write_log("背景窗体特效设置成功");
 
     //窗口大小及位置
-    resize(aWid, aHei);
+	resize(scrSize);
     move(0, 0);
 
     hide();

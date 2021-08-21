@@ -13,7 +13,7 @@ class BackgroundWidget : public QWidget
 private:
     Ui::BackgroundWidget *ui;
 public:
-    explicit BackgroundWidget(int aWid, int aHei);
+	explicit BackgroundWidget();
 
     void mousePressEvent(QMouseEvent* e);
 
