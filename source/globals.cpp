@@ -11,7 +11,7 @@ QFile* logFile;
 void write_log(const QString &text)
 {
     QString tmp = "[";
-    tmp.append(QTime::currentTime().toString());
+	tmp.append(QTime::currentTime().toString() + '.' + QString::number(QTime::currentTime().msec()));
     tmp.append("] ").append(text).append('\n');
     logFile->open(QFile::ReadWrite | QFile::Append);
     logFile->write(tmp.toUtf8());

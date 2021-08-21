@@ -34,11 +34,11 @@ public:
     TimeWidget(QWidget *parent = nullptr);
 
     //创建系统托盘图标
-    void add_tray_icon();
+	void addTrayIcon();
 
-    void mousePressEvent(QMouseEvent* e);
+	void mousePressEvent(QMouseEvent* e);
 
-    void mouseMoveEvent(QMouseEvent* e);
+	void mouseMoveEvent(QMouseEvent* e);
 
     void mouseDoubleClickEvent(QMouseEvent* e);
 
@@ -53,31 +53,37 @@ public:
     void on_mainTimer_timeOut();
 
     //从托盘中唤起槽函数
-    void slotShow();
+	void slotShow();
 
     //最小化槽函数
-    void slotHide();
+	void slotHide();
 
     //关机槽函数
-    void slotShutDown();
+	void slotShutDown();
 
     //重启槽函数
-    void slotRestart();
+	void slotRestart();
 
     //显示消息槽函数
-    void slotShowMessage(QString msg);
+	void slotShowMessage(QString msg);
 
     //退出槽函数
-    void slotExit();
+	void slotExit();
 
 	//事件变更槽函数
 	void slotEventChanged(QString name);
 
     //自动对齐
-    void auto_align(QPoint pos);
+	void autoAlign(QPoint pos);
 
 	//真·关机前摇
-	void shutdown_prerock();
+	void shutdownPrerock();
+
+	//自动resize
+	void autoResize();
+
+	//更新设置
+	void updateSettings();
 
     ~TimeWidget();
 };

@@ -5,11 +5,12 @@ class Settings
 {
 private:
     QFile* settingsFile;
-    QFile* logFile;
+	QJsonObject* settingsObj;
     double m_size;
-    short m_timerInterval;
+	int m_timerInterval;
     bool m_doAutoAlign;
-	short m_shutdownPrerock;
+	int m_shutdownPrerock;
+	bool m_newlyInstalled;
 public:
     Settings();
 
@@ -20,7 +21,7 @@ public:
     void write_default_settings();
 
     //写入设置
-    void write_settings();
+	void write_settings();
 
     double size() {return m_size;}
     short timerInterval() {return m_timerInterval;}

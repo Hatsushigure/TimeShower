@@ -47,9 +47,8 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     write_log("字体颜色设置完毕");
 
     //移动及改变大小
-    move(0, 0);
-	resize(scale(size()));
-	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
+	move(0, 0);	//改
+	resize(scrSize * settings->size());
     write_log("主窗口大小及位置初始化完毕");
 
     //处理侧边栏
@@ -61,7 +60,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     write_log("计时器已开启");
 
     //创建托盘图标
-    add_tray_icon();
+	addTrayIcon();
 
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
@@ -76,7 +75,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 }
 
 //创建系统托盘图标
-void TimeWidget::add_tray_icon()
+void TimeWidget::addTrayIcon()
 {
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(appIcon);
@@ -124,7 +123,7 @@ void TimeWidget::slotHide()
 void TimeWidget::slotShutDown()
 {
     write_log("关机事件触发");
-	shutdown_prerock();
+	shutdownPrerock();
 }
 
 //重启槽函数
@@ -198,7 +197,7 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
         //自动对齐
         if(settings->doAutoAlign())
         {
-            auto_align(e->globalPosition().toPoint());
+			autoAlign(e->globalPosition().toPoint());
         }
 
         //调整侧边栏位置
@@ -239,6 +238,9 @@ void TimeWidget::on_mainTimer_timeOut()
     curTime = QTime::currentTime();
     ui->timeLabel->setText(curTime.toString());
     evMgr->trigger();
+
+	//测试代码
+	updateSettings();
 }
 
 void TimeWidget::on_bck_stpMoving()
@@ -251,7 +253,7 @@ void TimeWidget::on_bck_stpMoving()
 
 
 //自动对齐
-void TimeWidget::auto_align(QPoint pos)
+void TimeWidget::autoAlign(QPoint pos)
 {
     //获取网格宽度和高度
     double gridWid = scrWid * settings->size();
@@ -267,7 +269,7 @@ void TimeWidget::auto_align(QPoint pos)
 }
 
 //真·关机前摇
-void TimeWidget::shutdown_prerock()
+void TimeWidget::shutdownPrerock()
 {
 	Dialog dlg(bck, scrSize.width(), "关机提示");
 	dlg.resize(scrSize);
@@ -296,6 +298,20 @@ void TimeWidget::shutdown_prerock()
 	{
 		system("shutdown -s -t 0");
 	}
+}
+
+//自动resize
+void TimeWidget::autoResize()
+{
+	resize(scrSize * settings->size());
+}
+
+//更新设置
+void TimeWidget::updateSettings()
+{
+	settings->read_settings();
+	autoResize();
+	mainTimer->setInterval(settings->timerInterval());
 }
 
 TimeWidget::~TimeWidget()

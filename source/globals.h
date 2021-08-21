@@ -1,5 +1,4 @@
 #pragma once
-
 #include "settings.h"
 
 //全局变量
