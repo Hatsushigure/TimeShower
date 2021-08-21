@@ -16,6 +16,7 @@ class SideBar : public QWidget
 private:
     Ui::SideBar *ui;
     SideBarType curType;
+	QSize originSize;
 public:
 	explicit SideBar(QWidget *parent = nullptr);
 
@@ -23,9 +24,12 @@ public:
     void setType(SideBarType tp);
 
     //自动移动
-    void auto_move(QPoint aPos, QSize aWH);    //后一个参数代表父窗体的宽高
+	void autoMove(QPoint aPos, QSize aWH);    //后一个参数代表父窗体的宽高
 
     void paintEvent(QPaintEvent* e);
+
+	//自动resize
+	void autoResize();
 
     ~SideBar();
 

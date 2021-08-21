@@ -7,22 +7,14 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 
     //初始化变量
 	curType = SideBarType::right;
+	originSize = scale(size());
 
     //窗口特效
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
 	//初始化大小
-	int marginL = layout()->contentsMargins().left();
-	QSize tmp(width() - 2 * marginL, width() - 2 * marginL);
-	ui->minimizeButton->setIconSize(tmp);
-	ui->aboutButton->setIconSize(tmp);
-	ui->settingsButton->setIconSize(tmp);
-	//ui->minimizeButton->resize(tmp);
-	//ui->aboutButton->resize(tmp);
-	//ui->settingsButton->resize(tmp);
-	resize(scale(size()));
-	resize(size() * (settings->size() / DefaultSettings::DEF_SIZE));
+	autoResize();
 
     hide();
 
@@ -60,7 +52,7 @@ void SideBar::on_aboutButton_clicked()
 }
 
 //自动移动
-void SideBar::auto_move(QPoint aPos, QSize aWH)
+void SideBar::autoMove(QPoint aPos, QSize aWH)
 {
     switch(curType)
     {
@@ -85,6 +77,17 @@ void SideBar::paintEvent(QPaintEvent* e)
 {
     Q_UNUSED(e)
     round_corner(this, QColor(220, 220, 220, 100));
+}
+
+//自动resize
+void SideBar::autoResize()
+{
+	int marginL = layout()->contentsMargins().left();
+	resize(originSize * (settings->size() / DefaultSettings::DEF_SIZE));
+	QSize tmp(width() - 2 * marginL, width() - 2 * marginL);
+	ui->minimizeButton->setIconSize(tmp);
+	ui->aboutButton->setIconSize(tmp);
+	ui->settingsButton->setIconSize(tmp);
 }
 
 SideBar::~SideBar()

@@ -7,6 +7,9 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
     //初始化变量
     write_log("正在初始化时间表");
+
+	originSize = scale(size());
+
     evMgr = new TimeEventManager;
     evMgr->connect_events(this);
 
@@ -209,7 +212,7 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
         {
             sideBar->setType(SideBarType::right);
         }
-        sideBar->auto_move(pos(), size());
+        sideBar->autoMove(pos(), size());
 
         write_log("移动至：(" + QString::number(x()) + ", " + QString::number(y()) + ")");
     }
@@ -222,7 +225,7 @@ void TimeWidget::moveEvent(QMoveEvent* e)
     if(sideBar != nullptr)
     {
         //移动侧边栏
-        sideBar->auto_move(pos(), size());
+        sideBar->autoMove(pos(), size());
     }
 }
 
@@ -311,6 +314,7 @@ void TimeWidget::updateSettings()
 {
 	settings->read_settings();
 	autoResize();
+	sideBar->autoResize();
 	mainTimer->setInterval(settings->timerInterval());
 }
 

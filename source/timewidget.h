@@ -30,6 +30,7 @@ private:
    QAction* actionHide;
    QMenu* trayMenu;
    TimeEventManager* evMgr;
+   QSize originSize;
 public:
     TimeWidget(QWidget *parent = nullptr);
 
