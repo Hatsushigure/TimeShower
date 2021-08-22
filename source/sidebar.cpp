@@ -1,5 +1,6 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
+#include "timewidget.h"
 
 SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
@@ -13,8 +14,9 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-	//初始化大小
+	//初始化大小和位置
 	autoResize();
+	autoMove();
 
     hide();
 
@@ -41,7 +43,7 @@ void SideBar::on_aboutButton_clicked()
 {
     write_log("“关于”按钮被点击");
 
-	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.2.3\n    作者:czj_____", "关于 \"时间显示器\"");
+	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.3早期测试版\n    作者:czj_____", "关于 \"时间显示器\"");
     QPushButton* btn = about.add_button("关于Qt");
     about.add_button("确定");
     about.exec();
@@ -52,15 +54,15 @@ void SideBar::on_aboutButton_clicked()
 }
 
 //自动移动
-void SideBar::autoMove(QPoint aPos, QSize aWH)
+void SideBar::autoMove()
 {
     switch(curType)
     {
     case SideBarType::right:
-        move(aPos + QPoint(aWH.width(), 0));
+		move(timeWid->pos() + QPoint(timeWid->width(), 0));
         break;
     case SideBarType::left:
-        move(aPos - QPoint(width(), 0));
+		move(timeWid->pos() - QPoint(width(), 0));
         break;
     default:
         break;

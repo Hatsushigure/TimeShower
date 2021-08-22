@@ -18,7 +18,7 @@ public:
     void initialize_timetable();
 
     //关联事件的信号
-    void connect_events(TimeWidget* parent);
+	void connect_events();
 
     //触发事件
     void trigger();

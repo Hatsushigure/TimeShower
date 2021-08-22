@@ -1,11 +1,20 @@
 #pragma once
 #include "settings.h"
 
+class BackgroundWidget;
+class TimeEventManager;
+class SideBar;
+class TimeWidget;
+
 //全局变量
 extern Settings* settings;
 extern QSize scrSize;
 extern QIcon appIcon;
 extern QFile* logFile;
+extern BackgroundWidget* bck;
+extern TimeEventManager* evMgr;
+extern SideBar* sideBar;
+extern TimeWidget* timeWid;
 
 //全局函数
 //写日志

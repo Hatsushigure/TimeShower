@@ -1,4 +1,5 @@
 #include "timewidget.h"
+#include "sidebar.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
     scrSize = a.primaryScreen()->size();
     settings = new Settings;
     appIcon.addFile(":/resources/appIcon.svg");
-    TimeWidget w;
+	timeWid = new TimeWidget;
+	sideBar = new SideBar;
+	QObject::connect(sideBar, &SideBar::signalHide, timeWid, &TimeWidget::slotHide);
     return a.exec();
 }

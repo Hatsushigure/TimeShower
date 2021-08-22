@@ -1,5 +1,8 @@
+#include "backgroundwidget.h"
+#include "timeeventmanager.h"
 #include "timewidget.h"
 #include "ui_timewidget.h"
+#include "sidebar.h"
 
 TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget)
 {
@@ -11,7 +14,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 	originSize = scale(size());
 
     evMgr = new TimeEventManager;
-    evMgr->connect_events(this);
+	evMgr->connect_events();
 
     //以下3行将会修改
     scrWid = scrSize.width();
@@ -54,9 +57,6 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 	resize(scrSize * settings->size());
     write_log("主窗口大小及位置初始化完毕");
 
-    //处理侧边栏
-	sideBar = new SideBar(this);
-
     //处理计时器
     mainTimer->setInterval(settings->timerInterval());
     mainTimer->start();
@@ -68,7 +68,6 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     //关联信号和槽
     connect(mainTimer, &QTimer::timeout, this, &TimeWidget::on_mainTimer_timeOut);
     connect(bck, &BackgroundWidget::stpMoving, this, &TimeWidget::on_bck_stpMoving);
-    connect(sideBar, &SideBar::signalHide, this, &TimeWidget::slotHide);
     connect(actionShow, &QAction::triggered, this, &TimeWidget::slotShow);
     connect(actionExit, &QAction::triggered, this, &TimeWidget::slotExit);
     connect(actionHide, &QAction::triggered, this, &TimeWidget::slotHide);
@@ -94,16 +93,12 @@ void TimeWidget::addTrayIcon()
 
     trayIcon->show();
     write_log("系统托盘图标创建成功");
-
-    //测试
-	//trayIcon->showMessage("A Test", "测试消息", appIcon);
-	//shutdown_prerock();
 }
 
 //从托盘中唤起
 void TimeWidget::slotShow()
 {
-    show();
+	show();
     actionShow->setDisabled(true);
     actionHide->setEnabled(true);
     write_log("主界面已显示");
@@ -212,7 +207,7 @@ void TimeWidget::mouseReleaseEvent(QMouseEvent* e)
         {
             sideBar->setType(SideBarType::right);
         }
-        sideBar->autoMove(pos(), size());
+		sideBar->autoMove();
 
         write_log("移动至：(" + QString::number(x()) + ", " + QString::number(y()) + ")");
     }
@@ -225,7 +220,7 @@ void TimeWidget::moveEvent(QMoveEvent* e)
     if(sideBar != nullptr)
     {
         //移动侧边栏
-        sideBar->autoMove(pos(), size());
+		sideBar->autoMove();
     }
 }
 

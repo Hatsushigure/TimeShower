@@ -1,8 +1,5 @@
 #pragma once
 #include "timeshower.h"
-#include "backgroundwidget.h"
-#include "sidebar.h"
-#include "timeeventmanager.h"
 #include "globals.h"
 
 QT_BEGIN_NAMESPACE
@@ -22,14 +19,11 @@ private:
    QTimer* shutDownTimer;
    int scrWid;
    int scrHei;
-   BackgroundWidget* bck;
-   SideBar* sideBar;
    QSystemTrayIcon* trayIcon;
    QAction* actionExit;
    QAction* actionShow;
    QAction* actionHide;
    QMenu* trayMenu;
-   TimeEventManager* evMgr;
    QSize originSize;
 public:
     TimeWidget(QWidget *parent = nullptr);

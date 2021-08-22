@@ -24,7 +24,7 @@ public:
     void setType(SideBarType tp);
 
     //自动移动
-	void autoMove(QPoint aPos, QSize aWH);    //后一个参数代表父窗体的宽高
+	void autoMove();
 
     void paintEvent(QPaintEvent* e);
 

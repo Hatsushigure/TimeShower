@@ -5,6 +5,10 @@ Settings* settings;
 QSize scrSize;
 QIcon appIcon;
 QFile* logFile;
+BackgroundWidget* bck;
+TimeEventManager* evMgr;
+SideBar* sideBar;
+TimeWidget* timeWid;
 
 //全局函数
 //写日志

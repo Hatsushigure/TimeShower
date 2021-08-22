@@ -38,19 +38,19 @@ void TimeEventManager::initialize_timetable()
 }
 
 //关联事件的信号
-void TimeEventManager::connect_events(TimeWidget* parent)
+void TimeEventManager::connect_events()
 {
     write_log("正在关联时间表与对应操作");
 
     for(auto i = events.begin(); i != events.end(); i++)
     {
-        connect(*i, &TimeEvent::signalExit, parent, &TimeWidget::slotExit);
-        connect(*i, &TimeEvent::signalHide, parent, &TimeWidget::slotHide);
-        connect(*i, &TimeEvent::signalRestart, parent, &TimeWidget::slotRestart);
-        connect(*i, &TimeEvent::signalShow, parent, &TimeWidget::slotShow);
-        connect(*i, &TimeEvent::signalShowMessage, parent, &TimeWidget::slotShowMessage);
-        connect(*i, &TimeEvent::signalShutDown, parent, &TimeWidget::slotShutDown);
-		connect(this, &TimeEventManager::eventChanged, parent, &TimeWidget::slotEventChanged);
+		connect(*i, &TimeEvent::signalExit, timeWid, &TimeWidget::slotExit);
+		connect(*i, &TimeEvent::signalHide, timeWid, &TimeWidget::slotHide);
+		connect(*i, &TimeEvent::signalRestart, timeWid, &TimeWidget::slotRestart);
+		connect(*i, &TimeEvent::signalShow, timeWid, &TimeWidget::slotShow);
+		connect(*i, &TimeEvent::signalShowMessage, timeWid, &TimeWidget::slotShowMessage);
+		connect(*i, &TimeEvent::signalShutDown, timeWid, &TimeWidget::slotShutDown);
+		connect(this, &TimeEventManager::eventChanged, timeWid, &TimeWidget::slotEventChanged);
     }
 
     write_log("关联结束");
