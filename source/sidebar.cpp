@@ -7,7 +7,9 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 
     //初始化变量
 	curType = SideBarType::right;
+	qDebug() << size().height();
 	originSize = scale(size());
+	qDebug() << originSize.height();
 
     //窗口特效
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool | Qt::FramelessWindowHint);
