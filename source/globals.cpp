@@ -38,11 +38,11 @@ void round_corner(QWidget* wid, QColor col)
 //缩放
 QSize scale(const QSize origin)
 {
-	double rate = scrSize.width() / STD_SCR_WIDTH;
+	double rate = (double)scrSize.width() / (double)STD_SCR_WIDTH;
 	return origin * rate;
 }
 int scale(const int origin)
 {
-	double rate = scrSize.width() / STD_SCR_WIDTH;
+	double rate = (double)scrSize.width() / (double)STD_SCR_WIDTH;
 	return origin * rate;
 }

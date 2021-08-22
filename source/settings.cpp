@@ -20,7 +20,7 @@ Settings::Settings()
 //读取设置
 void Settings::read_settings()
 {    
-    write_log("正在读取设置...");
+	//write_log("正在读取设置...");
     if(!settingsFile->exists()) //文件不存在
     {
 		write_log("检测到首次使用");
@@ -50,7 +50,7 @@ void Settings::read_settings()
 			m_timerInterval = settingsObj->value("timerInterval").toInt();
 		}
 
-		write_log("赋值完毕");
+		//write_log("赋值完毕");
 
 		if (settingsObj->value("settingsVersion").toInt() < SETTINGS_VERSION) {	//检测设置版本
 			oldSettings = true;
