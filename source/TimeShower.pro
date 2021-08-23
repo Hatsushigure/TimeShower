@@ -45,6 +45,7 @@ HEADERS += \
 FORMS += \
     backgroundwidget.ui \
     dialog.ui \
+    settingswidget.ui \
     sidebar.ui \
     timewidget.ui
 

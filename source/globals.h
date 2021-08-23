@@ -5,6 +5,7 @@ class BackgroundWidget;
 class TimeEventManager;
 class SideBar;
 class TimeWidget;
+class SettingsWidget;
 
 //全局变量
 extern Settings* settings;
@@ -15,6 +16,7 @@ extern BackgroundWidget* bck;
 extern TimeEventManager* evMgr;
 extern SideBar* sideBar;
 extern TimeWidget* timeWid;
+extern SettingsWidget* settingsWid;
 
 //全局函数
 //写日志

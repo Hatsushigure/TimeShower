@@ -1,5 +1,6 @@
 #include "timewidget.h"
 #include "sidebar.h"
+#include "settingswidget.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,5 +20,6 @@ int main(int argc, char *argv[])
 	timeWid = new TimeWidget;
 	sideBar = new SideBar;
 	QObject::connect(sideBar, &SideBar::signalHide, timeWid, &TimeWidget::slotHide);
+	settingsWid = new SettingsWidget;
     return a.exec();
 }

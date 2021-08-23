@@ -9,6 +9,7 @@ BackgroundWidget* bck;
 TimeEventManager* evMgr;
 SideBar* sideBar;
 TimeWidget* timeWid;
+SettingsWidget* settingsWid;
 
 //全局函数
 //写日志

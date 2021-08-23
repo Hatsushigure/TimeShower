@@ -37,7 +37,7 @@ bool Dialog::eventFilter(QObject* watch, QEvent* e)
     {
         if(e->type() == QEvent::MouseButtonPress)
         {
-            QMouseEvent* event = static_cast<QMouseEvent*>(e);
+			QMouseEvent* event = static_cast<QMouseEvent*>(e);
             fstPos = event->globalPosition().toPoint();
             return true;
         }

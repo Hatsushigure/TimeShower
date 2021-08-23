@@ -1,6 +1,7 @@
 #include "sidebar.h"
 #include "ui_sidebar.h"
 #include "timewidget.h"
+#include "settingswidget.h"
 
 SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
@@ -26,10 +27,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 void SideBar::on_settingsButton_clicked()
 {
     write_log("“设置”按钮被点击");
-
-    MessageBox inf(this, scrSize.width(), "    暂时不提供图形设置界面!", "提示");
-    inf.add_button("确定");
-    inf.exec();
+	settingsWid->show();
 }
 
 void SideBar::on_minimizeButton_clicked()
