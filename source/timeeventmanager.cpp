@@ -8,6 +8,7 @@ TimeEventManager::TimeEventManager()
     timetable = QJsonDocument::fromJson(tmp.readAll());
     tmp.close();
     initialize_timetable();
+	connect_events();
 
     write_log("时间表初始化完成");
 }
@@ -20,15 +21,12 @@ void TimeEventManager::initialize_timetable()
     {
         QJsonObject obj = i->toObject();
         QString name = obj.value("name").toString();
-        qDebug() << name;
         int time = obj.value("time").toInt();
-        qDebug() << time;
         QJsonArray arr1 = obj.value("actions").toArray();
         QList<TimeEventAction> actions;
         for(auto j = arr1.begin(); j != arr1.end(); j ++)
         {
             TimeEventAction act = static_cast<TimeEventAction>(j->toInt());
-            qDebug() << int(act);
             actions.push_back(act);
         }
         QString msg = obj.value("message").toString();

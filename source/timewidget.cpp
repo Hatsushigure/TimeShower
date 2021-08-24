@@ -13,9 +13,6 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
 
 	originSize = scale(size());
 
-    evMgr = new TimeEventManager;
-	evMgr->connect_events();
-
     //以下3行将会修改
     scrWid = scrSize.width();
     scrHei = scrSize.height();
@@ -282,6 +279,9 @@ void TimeWidget::shutdownPrerock()
 	dlg.add_button("我想让电脑蓝瓶钙");
 
 	shutDownTimer = new QTimer;
+
+	qDebug() << settings->shutdownPrerock();
+
 	shutDownTimer->start(settings->shutdownPrerock() * 1000);
 	connect(shutDownTimer, &QTimer::timeout, this, [](){
 		system("shutdown -s -t 0");

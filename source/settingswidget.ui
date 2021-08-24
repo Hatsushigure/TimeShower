@@ -17,49 +17,91 @@
    <iconset resource="resources.qrc">
     <normaloff>:/resources/fluentStyle/buttons/settings.svg</normaloff>:/resources/fluentStyle/buttons/settings.svg</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,6">
-   <property name="spacing">
-    <number>0</number>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color:#EFF4F9
+}</string>
+  </property>
+  <widget class="QWidget" name="titleBar" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>30</height>
+    </rect>
    </property>
-   <property name="leftMargin">
-    <number>0</number>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
-   <property name="topMargin">
-    <number>0</number>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
    </property>
-   <property name="rightMargin">
-    <number>0</number>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
-   <property name="bottomMargin">
-    <number>0</number>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>0</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>这是标题栏</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>800</width>
+     <height>570</height>
+    </rect>
    </property>
-   <item>
-    <widget class="QWidget" name="titleBar" native="true">
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>20</y>
-        <width>441</width>
-        <height>241</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <property name="text">
-       <string>这是标题栏</string>
-      </property>
-     </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>570</height>
+     </rect>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::West</enum>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
     </widget>
-   </item>
-   <item>
-    <widget class="QWidget" name="widget" native="true"/>
-   </item>
-  </layout>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
  </widget>
  <resources>
   <include location="resources.qrc"/>

@@ -41,7 +41,7 @@ void Settings::read_settings()
 			m_size = settingsObj->value("size").toDouble();
 		}
 		if (settingsObj->find("shutdownPrerock") != settingsObj->end()) {	//关机前摇
-			m_shutdownPrerock = settingsObj->value("shutdownProrock").toInt();
+			m_shutdownPrerock = settingsObj->value("shutdownPrerock").toInt();
 		}
 		if (settingsObj->find("doAutoAlign") != settingsObj->end()) {	//是否自动对齐
 			m_doAutoAlign = settingsObj->value("doAutoAlign").toBool();
