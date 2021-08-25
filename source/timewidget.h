@@ -43,6 +43,12 @@ public:
 
     void paintEvent(QPaintEvent* e);
 
+	//拖拽进入事件
+	void dragEnterEvent(QDragEnterEvent* e);
+
+	//拖拽释放事件
+	void dropEvent(QDropEvent* e);
+
     void on_bck_stpMoving();
 
     void on_mainTimer_timeOut();
@@ -79,6 +85,9 @@ public:
 
 	//更新设置
 	void updateSettings();
+
+	//更新事件
+	void updateTimeEvents();
 
     ~TimeWidget();
 };

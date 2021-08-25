@@ -41,6 +41,7 @@ TimeWidget::TimeWidget(QWidget *parent) : QWidget(parent), ui(new Ui::TimeWidget
     //窗口效果
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
+	setAcceptDrops(true);
     write_log("主窗口特效设置完毕");
 
     //设置界面元素显示效果
@@ -227,6 +228,35 @@ void TimeWidget::paintEvent(QPaintEvent* e)
     round_corner(this, QColor(220, 220, 220, 100));
 }
 
+//拖拽进入事件
+void TimeWidget::dragEnterEvent(QDragEnterEvent* e)
+{
+	if (e->mimeData()->hasUrls()) {
+		write_log("拖拽文件进入");
+		e->acceptProposedAction();
+	}
+	else {
+		e->ignore();
+	}
+}
+
+//拖拽释放事件
+void TimeWidget::dropEvent(QDropEvent* e)
+{
+	if (e->mimeData()->hasUrls()) {
+		write_log("文件释放");
+		QUrl url = e->mimeData()->urls().first();
+		QFile timetable(url.toLocalFile());
+		//timetable.open(QFile::ReadOnly);
+		if (QFile(TIMETABLE_FILE_NAME).exists()) {
+			QFile(TIMETABLE_FILE_NAME).remove();
+		}
+		timetable.copy(TIMETABLE_FILE_NAME);
+		updateTimeEvents();
+		qDebug() << e->mimeData()->urls().first();
+	}
+}
+
 void TimeWidget::on_mainTimer_timeOut()
 {
     mainTimer->start();
@@ -311,6 +341,14 @@ void TimeWidget::updateSettings()
 	autoResize();
 	sideBar->autoResize();
 	mainTimer->setInterval(settings->timerInterval());
+}
+
+//更新事件
+void TimeWidget::updateTimeEvents()
+{
+	delete evMgr;
+	ui->eventLabel->setText("无事件");
+	evMgr = new TimeEventManager;
 }
 
 TimeWidget::~TimeWidget()

@@ -79,7 +79,7 @@
       </font>
      </property>
      <property name="text">
-      <string>(未启用)</string>
+      <string>无事件</string>
      </property>
     </widget>
    </item>
