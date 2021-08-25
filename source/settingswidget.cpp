@@ -6,11 +6,18 @@ SettingsWidget::SettingsWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Se
 	ui->setupUi(this);
 
 	//设置属性
-	setAttribute(Qt::WA_QuitOnClose, false);
 	setWindowFlag(Qt::FramelessWindowHint);
+	setAttribute(Qt::WA_QuitOnClose, false);
+	setAttribute(Qt::WA_TranslucentBackground);
 
 	//安装事件过滤器
 	ui->titleBar->installEventFilter(this);
+
+	//添加按钮
+	QPushButton* btn1 = new QPushButton(QIcon(":/resources/fluentStyle/buttons/close.svg"), "");
+	btn1->setFlat(true);
+	ui->buttonBox->addButton(btn1, QDialogButtonBox::NoRole);
+	btn1->setIconSize(QSize(30, 30));
 }
 
 SettingsWidget::~SettingsWidget()

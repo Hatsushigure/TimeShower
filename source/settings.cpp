@@ -12,6 +12,7 @@ Settings::Settings()
     m_doAutoAlign = DEF_DO_AUTO_ALIGN;
 	m_timerInterval = DEF_TIMER_INTERVAL;
 	m_shutdownPrerock = DEF_SHUTDOWN_PREROCK;
+	m_enableSettingsWidget = DEF_ENABLE_SETTINGS_WIDGET;
 
     read_settings();
     write_log("设置对象已创建");
@@ -46,8 +47,11 @@ void Settings::read_settings()
 		if (settingsObj->find("doAutoAlign") != settingsObj->end()) {	//是否自动对齐
 			m_doAutoAlign = settingsObj->value("doAutoAlign").toBool();
 		}
-		if (settingsObj->find("timerInterval") != settingsObj->end()) {
+		if (settingsObj->find("timerInterval") != settingsObj->end()) {	//时钟频率
 			m_timerInterval = settingsObj->value("timerInterval").toInt();
+		}
+		if (settingsObj->find("enableSettingsWidget") != settingsObj->end()) {	//是否生草
+			m_enableSettingsWidget = settingsObj->value("enableSettingsWidget").toBool();
 		}
 
 		//write_log("赋值完毕");
@@ -78,6 +82,7 @@ void Settings::write_default_settings()
 	settingsObj->insert("doAutoAlign", DEF_DO_AUTO_ALIGN);	//是否自动对齐
 	settingsObj->insert("shutdownPrerock", DEF_SHUTDOWN_PREROCK);	//关机前摇
 	settingsObj->insert("timerInterval", DEF_TIMER_INTERVAL);	//时钟更新间隔
+	settingsObj->insert("enableSettingsWidget", DEF_ENABLE_SETTINGS_WIDGET);	//是否生草
 	write_log("设置载入成功，即将写入");
 
 	QJsonDocument doc(*settingsObj);
@@ -99,6 +104,7 @@ void Settings::write_settings()
 	settingsObj->insert("doAutoAlign", m_doAutoAlign);	//是否自动对齐
 	settingsObj->insert("shutdownPrerock", m_shutdownPrerock);	//关机前摇
 	settingsObj->insert("timerInterval", m_timerInterval);	//时钟更新间隔
+	settingsObj->insert("enableSettingsWidget", m_enableSettingsWidget);	//是否生草
 	write_log("设置载入成功，即将写入");
 
 	QJsonDocument doc(*settingsObj);

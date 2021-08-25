@@ -28,7 +28,7 @@
 const int STD_SCR_WIDTH = 1366; //标准屏幕宽度(为了标题栏缩放)
 const QString SETTINGS_FILE_NAME = "settings.json";
 const QString TIMETABLE_FILE_NAME = "timetable.json";
-const int SETTINGS_VERSION = 1;	//设置版本
+const int SETTINGS_VERSION = 2;	//设置版本
 
 namespace DialogDefines {
 const int STD_TITLE_HEIGHT = 25;    //标准标题栏高度
@@ -39,6 +39,7 @@ const double DEF_SIZE = 0.125;
 const bool DEF_DO_AUTO_ALIGN = true;
 const int DEF_TIMER_INTERVAL = 10;    //计时器更新频率（很长一段时间内将为常量）
 const int DEF_SHUTDOWN_PREROCK = 300;	//关机前摇长度
+const bool DEF_ENABLE_SETTINGS_WIDGET = false;
 }
 
 //枚举

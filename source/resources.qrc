@@ -6,5 +6,6 @@
         <file>resources/fluentStyle/buttons/settings.svg</file>
         <file>resources/fluentStyle/buttons/minimize.svg</file>
         <file>resources/appIcon.svg</file>
+        <file>resources/fluentStyle/buttons/back.svg</file>
     </qresource>
 </RCC>

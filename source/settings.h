@@ -11,6 +11,7 @@ private:
     bool m_doAutoAlign;
 	int m_shutdownPrerock;
 	bool m_newlyInstalled;
+	bool m_enableSettingsWidget;
 public:
     Settings();
 
@@ -27,4 +28,5 @@ public:
     short timerInterval() {return m_timerInterval;}
     bool doAutoAlign() {return m_doAutoAlign;}
 	short shutdownPrerock() {return m_shutdownPrerock;}
+	bool enableSettingsWidget() {return m_enableSettingsWidget;}
 };

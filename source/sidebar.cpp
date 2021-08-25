@@ -2,6 +2,7 @@
 #include "ui_sidebar.h"
 #include "timewidget.h"
 #include "settingswidget.h"
+#include "backgroundwidget.h"
 
 SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 {
@@ -27,7 +28,14 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent), ui(new Ui::SideBar)
 void SideBar::on_settingsButton_clicked()
 {
     write_log("“设置”按钮被点击");
-	settingsWid->show();
+	if (settings->enableSettingsWidget()) {
+		settingsWid->show();
+	}
+	else {
+		MessageBox msg(bck, scrSize.width(), "    暂不提供图形设置界面，因为还没做完", "");
+		msg.add_button("确定");
+		msg.exec();
+	}
 }
 
 void SideBar::on_minimizeButton_clicked()
@@ -41,7 +49,7 @@ void SideBar::on_aboutButton_clicked()
 {
     write_log("“关于”按钮被点击");
 
-	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.3早期测试版\n    作者:czj_____", "关于 \"时间显示器\"");
+	MessageBox about(this, scrSize.width(), "    此应用为时间显示应用，可在屏幕上置顶显示时间。\n    当前版本:1.3\n    作者:czj_____", "关于 \"时间显示器\"");
     QPushButton* btn = about.add_button("关于Qt");
     about.add_button("确定");
     about.exec();
