@@ -10,32 +10,34 @@ CONFIG += c++11
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 RC_ICONS = ./resources/appIcon.ico
-VERSION = 1.3
+VERSION = 1.3.1
 QMAKE_TARGET_PRODUCT = TimeShower
 QMAKE_TARGET_COMPANY = czj_____
 QMAKE_TARGET_DESCRIPTION = TimeShower
 QMAKE_TARGET_COPYRIGHT = czj_____
 
 SOURCES += \
+    CustomizedWindow/customizedwindow.cpp \
+    CustomizedWindow/titlebar.cpp \
     backgroundwidget.cpp \
     dialog.cpp \
     globals.cpp \
     main.cpp \
     messagebox.cpp \
     settings.cpp \
-    settingswidget.cpp \
     sidebar.cpp \
     timeevent.cpp \
     timeeventmanager.cpp \
     timewidget.cpp
 
 HEADERS += \
+    CustomizedWindow/customizedwindow.h \
+    CustomizedWindow/titlebar.h \
     backgroundwidget.h \
     dialog.h \
     globals.h \
     messagebox.h \
     settings.h \
-    settingswidget.h \
     sidebar.h \
     timeevent.h \
     timeeventmanager.h \
@@ -45,7 +47,6 @@ HEADERS += \
 FORMS += \
     backgroundwidget.ui \
     dialog.ui \
-    settingswidget.ui \
     sidebar.ui \
     timewidget.ui
 

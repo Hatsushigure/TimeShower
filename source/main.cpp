@@ -1,7 +1,7 @@
 #include "timewidget.h"
 #include "sidebar.h"
-#include "settingswidget.h"
 #include "timeeventmanager.h"
+#include "CustomizedWindow/customizedwindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +22,9 @@ int main(int argc, char *argv[])
 	evMgr = new TimeEventManager;
 	sideBar = new SideBar;
 	QObject::connect(sideBar, &SideBar::signalHide, timeWid, &TimeWidget::slotHide);
-	settingsWid = new SettingsWidget;
+
+	//CustomizedWindow wid;
+	//wid.show();
+
     return a.exec();
 }

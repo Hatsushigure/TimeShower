@@ -7,8 +7,12 @@ TimeEventManager::TimeEventManager()
     tmp.open(QFile::ReadOnly);
     timetable = QJsonDocument::fromJson(tmp.readAll());
     tmp.close();
+	eventTimer = new QTimer;
+	eventTimer->setInterval(1000);
+	eventTimer->start();
     initialize_timetable();
 	connect_events();
+	connect(eventTimer, &QTimer::timeout, this, &TimeEventManager::onTimerTimeout);
 
     write_log("时间表初始化完成");
 }
@@ -57,14 +61,25 @@ void TimeEventManager::connect_events()
 //触发事件
 void TimeEventManager::trigger()
 {
-    if(!events.isEmpty())   //检测时间表是否为空
+	bool isEmpty = events.isEmpty();
+	qDebug() << "nb";
+	if(!isEmpty)   //检测时间表是否为空
     {
         (*events.begin())->trigger();
         if((*events.begin())->isTriggered())
         {
 			emit eventChanged((*events.begin())->name());
+			//写日志
+			write_log("当前事件:" + (*events.begin())->name());
 			delete (*events.begin());
             events.pop_front();
         }
     }
+}
+
+void TimeEventManager::onTimerTimeout()
+{
+	qDebug() << "aaa";
+	eventTimer->start();
+	trigger();
 }

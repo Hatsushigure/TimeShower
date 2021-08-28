@@ -30,12 +30,15 @@ void TimeEvent::trigger()
 {
     QTime tm = QTime::currentTime();
     int tmNum = tm.hour() * 3600 + tm.minute() * 60 + tm.second();
-	if (time > tmNum)
-	{
+	if (time > tmNum) {
 		return;
 	}
-	else if (check_time(tmNum))
-	{
+	else if (time < tmNum) {
+		triggered = true;
+		return;
+	}
+	else if (check_time(tmNum)) {
+		triggered = true;
 		for(auto i = actions.begin(); i != actions.end(); i++)
 		{
 			switch (*i)
@@ -63,5 +66,4 @@ void TimeEvent::trigger()
 			}
 		}
 	}
-	triggered = true;
 }

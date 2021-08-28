@@ -151,9 +151,6 @@ void TimeWidget::slotExit()
 void TimeWidget::slotEventChanged(QString name)
 {
 	ui->eventLabel->setText(name);
-
-	//写日志
-	write_log("当前事件:" + name);
 }
 
 void TimeWidget::mousePressEvent(QMouseEvent* e)
@@ -262,7 +259,6 @@ void TimeWidget::on_mainTimer_timeOut()
     mainTimer->start();
     curTime = QTime::currentTime();
     ui->timeLabel->setText(curTime.toString());
-    evMgr->trigger();
 
 	//测试代码
 	updateSettings();
@@ -296,36 +292,39 @@ void TimeWidget::autoAlign(QPoint pos)
 //真·关机前摇
 void TimeWidget::shutdownPrerock()
 {
-	Dialog dlg(bck, scrSize.width(), "关机提示");
-	dlg.resize(scrSize);
-	QLabel content("您将在" + QString::number(settings->shutdownPrerock()) + "秒后被注销\n请保存好当前未完成的工作！");
-	content.setFont(QFont("微软雅黑", 30, 1));
-	//content.setWordWrap(true);
-	content.setAlignment(Qt::AlignHCenter);
-	content.adjustSize();
-	dlg.setContent(&content);
-	dlg.add_button("确定");
-	QPushButton* btnShudown = dlg.add_button("我想现在关机");
-	dlg.add_button("我想让电脑蓝瓶钙");
+//	Dialog dlg(bck, scrSize.width(), "关机提示");
+//	dlg.resize(scrSize);
+//	QLabel content("您将在" + QString::number(settings->shutdownPrerock()) + "秒后被注销\n请保存好当前未完成的工作！");
+//	content.setFont(QFont("微软雅黑", 30, 1));
+//	//content.setWordWrap(true);
+//	content.setAlignment(Qt::AlignHCenter);
+//	content.adjustSize();
+//	dlg.setContent(&content);
+//	dlg.add_button("确定");
+//	QPushButton* btnShudown = dlg.add_button("我想现在关机");
+//	dlg.add_button("我想让电脑蓝瓶钙");
 
-	shutDownTimer = new QTimer;
+//	shutDownTimer = new QTimer;
 
-	qDebug() << settings->shutdownPrerock();
+//	qDebug() << settings->shutdownPrerock();
 
-	shutDownTimer->start(settings->shutdownPrerock() * 1000);
-	connect(shutDownTimer, &QTimer::timeout, this, [](){
-		system("shutdown -s -t 0");
-	});
-	write_log("关机计时器已创建");
+//	shutDownTimer->start(settings->shutdownPrerock() * 1000);
+//	connect(shutDownTimer, &QTimer::timeout, this, [](){
+//		system("shutdown -s -t 0");
+//	});
+//	write_log("关机计时器已创建");
 
-	bck->show();
-	dlg.exec();
-	bck->hide();
+//	bck->setWindowFlag(Qt::WindowStaysOnTopHint);
+//	bck->show();
+//	dlg.exec();
+//	bck->setWindowFlag(Qt::WindowStaysOnTopHint, false);
+//	bck->hide();
 
-	if(dlg.get_button() == btnShudown)
-	{
-		system("shutdown -s -t 0");
-	}
+//	if (dlg.get_button() == btnShudown) {
+//		system("shutdown -s -t 0");
+//	}
+//	return;
+	system(("shutdown -s -t " + QString::number(settings->shutdownPrerock())).toLatin1());
 }
 
 //自动resize
