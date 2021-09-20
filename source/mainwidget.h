@@ -3,7 +3,10 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWidget; }
+namespace Ui
+{
+	class MainWidget;
+}
 QT_END_NAMESPACE
 
 class MainWidget : public QWidget
