@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwidget.cpp
+    mainwidget.cpp \
+    timeshower.cpp
 
 HEADERS += \
-    mainwidget.h
+    mainwidget.h \
+    timeshower.h
 
 FORMS += \
     mainwidget.ui
